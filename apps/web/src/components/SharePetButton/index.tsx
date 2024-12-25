@@ -1,6 +1,7 @@
 import { Button, Flex, Text } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
+import React from 'react'
 
 export const SharePetButton = (): JSX.Element => {
   const { user } = useAuth()

@@ -20,6 +20,7 @@ import {
 import homeLogo from '../../../assets/home_dog.svg'
 import { CgLogOut } from 'react-icons/cg'
 import { useAuth } from '../../context/AuthContext'
+import React from 'react'
 
 export const Header = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure()

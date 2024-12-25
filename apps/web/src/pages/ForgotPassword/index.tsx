@@ -15,7 +15,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { ForgotPasswordForm } from '../../interfaces/ForgotPasswordData'
 import * as S from './styles'
 import { UserService } from '../../services/api/users'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 interface GeneralError {
   message: string

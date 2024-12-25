@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/react'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 

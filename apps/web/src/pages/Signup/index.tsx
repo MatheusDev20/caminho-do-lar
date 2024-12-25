@@ -15,7 +15,6 @@ import {
 } from '@chakra-ui/react'
 
 import { Link as DomLink, useNavigate } from 'react-router-dom'
-import { HafApi } from '../../services/api/haf_backend'
 import { EmailIcon, LockIcon, CheckIcon, InfoOutlineIcon } from '@chakra-ui/icons'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { SignForm, customLinkStyle } from './styles'

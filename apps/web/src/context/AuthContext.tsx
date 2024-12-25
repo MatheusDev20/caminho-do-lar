@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { createContext, ReactNode, useState, useContext } from 'react'
+import React, { createContext, ReactNode, useState, useContext } from 'react'
 import { LoginData, ApplicationUser } from '../interfaces'
 import { HafApi } from '../services/api/haf_backend'
 import { useNavigate } from 'react-router-dom'

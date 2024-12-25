@@ -1,6 +1,6 @@
 /* eslint-disable multiline-ternary */
 import { Button, CircularProgress, Flex, Heading, Image, SimpleGrid, Stack, Text } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Pet } from '../../interfaces/pet'
 import { GoLocation } from 'react-icons/go'

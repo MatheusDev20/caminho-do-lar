@@ -1,8 +1,9 @@
-import { Flex, Box, Image, Text, Button } from '@chakra-ui/react'
+import { Flex, Box, Image, Text } from '@chakra-ui/react'
 import { GiDogBowl } from 'react-icons/gi'
 import { HiLocationMarker } from 'react-icons/hi'
 import { Link, useNavigate } from 'react-router-dom'
 import { Pet } from '../../interfaces/pet'
+import React from 'react'
 interface PetCardProps {
   pet: Pet
 }

@@ -13,7 +13,6 @@ import {
   useToast,
   CircularProgress
 } from '@chakra-ui/react'
-
 import axios from 'axios'
 import { createPet, uploadImages } from '../../services/api/pets'
 import { BsGenderAmbiguous } from 'react-icons/bs'

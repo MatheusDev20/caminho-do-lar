@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { LoginData } from '../../interfaces'
 import { Link as RedirectLink } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { CustomLink } from '../../components/CustomLinks'
 
 export const LoginPage: React.FC = () => {

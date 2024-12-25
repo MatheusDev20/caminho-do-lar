@@ -3,7 +3,7 @@ import { Pagination } from '../Pagination'
 import { PetCard } from '../PetCard'
 import { getPetPage, getPageWithFilters } from '../../services/api/pets'
 import { Pet } from '../../interfaces/pet'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SearchForm } from '../PetSearchForm'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 

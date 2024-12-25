@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { Button, CircularProgress, Flex, FormControl, FormHelperText, Heading, Stack, Text, useToast } from '@chakra-ui/react'
+import { Button, CircularProgress, Flex, FormControl, Heading, Stack, useToast } from '@chakra-ui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ResetPasswordForm } from '../../interfaces/ForgotPasswordData'
 import * as S from './styles'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Input } from '../../components/Form/Input'
 import { UserService } from '../../services/api/users'
 import { useNavigate } from 'react-router-dom'
