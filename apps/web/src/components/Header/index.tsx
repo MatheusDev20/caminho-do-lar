@@ -1,46 +1,18 @@
-import { Link as RedirectLink, useNavigate } from 'react-router-dom'
-import {
-  Flex,
-  Box,
-  Text,
-  useDisclosure,
-  IconButton,
-  Stack,
-  Link,
-  Button,
-  Image,
-  useColorModeValue,
-  Avatar
-  , Icon
-} from '@chakra-ui/react'
-import {
-  HamburgerIcon,
-  CloseIcon
-} from '@chakra-ui/icons'
+import { Link as RedirectLink, useNavigate, Link } from 'react-router-dom'
+
 import homeLogo from '../../../assets/home_dog.svg'
-import { CgLogOut } from 'react-icons/cg'
 import { useAuth } from '../../context/AuthContext'
 import React from 'react'
 
 export const Header = (): JSX.Element => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const { user, signOut } = useAuth()
+  const { user } = useAuth()
   const navigate = useNavigate()
   return (
     <>
-      <Box bg='#1F2029' px={4} py={2}
-        // borderBottom={0.3}
-        // borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
-      >
-        <Flex
-          as='header'
-          alignItems={'center'}
-          justifyContent='space-around'>
-
+      <div className="bg-[#1F2029] border-b-2 border-t-0 border-r-0 border-l-0 border-gray-500 py-2 px-2">
+        <header className="flex items-center justify-around">
           {/* DropDown Responsive Icon */}
-
-          <IconButton
+          {/* <IconButto
             size={'sm'}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={'Open Menu'}
@@ -50,41 +22,18 @@ export const Header = (): JSX.Element => {
               bg: 'gray.500'
             }}
             onClick={isOpen ? onClose : onOpen}
-          />
+          /> */}
           {/* HAF Logo and Icon */}
-            <Flex
-              mr={{ base: '6rem', md: 0 }}
-              ml={{ base: '6rem', md: 0 }}
-              cursor='pointer'
-              gap='1rem'>
-                <Text
-                  onClick={() => { navigate('/home') }}
-                  alignSelf={{ base: 'center' }}
-                  fontWeight='bold'
-                  color={{
-                    base: '#02966a', md: '#02966a'
-                  }}
-                  display={{ base: 'inline', md: 'block' }}
-                  fontSize={{ base: 'sm', sm: 'sm', md: 'xl' }}
-                  fontStyle='oblique'
-                  lineHeight='2rem'
-                >
+            <div>
+                <span onClick={() => { navigate('/home') }} >
                   HELP A FRIEND
-                </Text>
-              <Image
-                display={{ base: 'none', sm: 'none', md: 'flex', lg: 'flex' }}
-                src={homeLogo}
-                w='3rem'
-                height='2rem' />
-            </Flex>
+                </span>
+              <img src={homeLogo} />
+            </div>
 
             {/* Navigation Links Desktop */}
-            <Stack
-              alignSelf='center'
-              as={'nav'}
-              display={{ base: 'none', md: 'flex' }}
-              flexDir='row'
-              gap='3rem'>
+            <div
+              className="flex flex-row gap-12">
               {activeLinks.map((link) => (
                 !link.auth && (
                     <NavLink
@@ -92,65 +41,47 @@ export const Header = (): JSX.Element => {
                     key={link.label}>{link.label}</NavLink>
                 )
               ))}
-            </Stack>
+            </div>
 
             {/* Navigation Links Desktop - END */}
           {/* User profile Info */}
           {user
             ? (
-            <Flex
-              alignItems='center'
-              gap='1rem'>
-              <Text
-                fontWeight='bold'
-                fontSize={{ base: 'sm', md: '0.9rem' }}
-              >{user?.name}</Text>
-              <Avatar h='2rem' w='2rem' src={user?.avatar} />
-              <Button
-                variant='link'
-              >
-                <Icon
+            <div
+              className="items-center flex flex-row gap-4">
+              <p>{user?.name}</p>
+              <img src={user?.avatar} />
+              <button>
+                <p>Signout</p>
+                {/* <Icon
                   onClick={signOut}
                   _hover={{ color: 'orange.200' }}
                   color='orange.400'
-                  as={CgLogOut} />
-              </Button>
-            </Flex>
+                  as={CgLogOut} /> */}
+              </button>
+            </div>
               )
-            : <Flex
-              gap='3rem'
-              mt='0.5rem'
-              paddingX='3'
-              paddingY='1'
-              display={{ base: 'flex' }}
-            >
+            : <div
+              className="flex flex-row gap-4 p-4">
               <RedirectLink to='/login'>
-                <Button
-                  variant='link'
-                  size='sm'
-                  _hover={{ color: '#15a97d' }}
+                <button
                   color='#02966a'>
                   Entrar
-                </Button>
+                </button>
               </RedirectLink>
               <RedirectLink to='/criar-usuario'>
-                <Button
-                  variant='contained'
-                  size='sm'
-                  display={{ base: 'none', md: 'block' }}
-                  _hover={{ bg: '#15a97d' }}
-                  bg='#02966a'>
+                <button>
                   Cadastrar
-                </Button>
+                </button>
               </RedirectLink>
-            </Flex>
+            </div>
           }
 
           {/* User profile Info - END */}
 
-        </Flex>
+        </header>
 
-        {
+        {/* {
           isOpen
             ? (
             <Box pb={4} display={{ md: 'none' }}>
@@ -166,8 +97,8 @@ export const Header = (): JSX.Element => {
             </Box>
               )
             : null
-        }
-      </Box >
+        } */}
+      </div>
     </>
   )
 }
@@ -175,14 +106,8 @@ export const Header = (): JSX.Element => {
 const NavLink = ({ children, redirectTo }: NavProps): JSX.Element => (
   <RedirectLink to={redirectTo} style={{ marginTop: '0.5rem' }}>
     <Link
-      as='p'
-      fontSize='1rem'
+    to="/"
       color={'orange.400'}
-      _hover={{
-        textDecoration: 'none',
-        color: 'orange.300',
-        transform: '0.2s ease in '
-      }}
     >
       {children}
     </Link>

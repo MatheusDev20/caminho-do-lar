@@ -1,11 +1,11 @@
-import { Button, Flex, Grid, Spinner } from '@chakra-ui/react'
+// import { Button, Flex, Grid } from '@chakra-ui/react'
 import { Pagination } from '../Pagination'
 import { PetCard } from '../PetCard'
 import { getPetPage, getPageWithFilters } from '../../services/api/pets'
 import { Pet } from '../../interfaces/pet'
 import React, { useState, useEffect } from 'react'
 import { SearchForm } from '../PetSearchForm'
-import { ArrowBackIcon } from '@chakra-ui/icons'
+// import { ArrowBackIcon } from '@chakra-ui/icons'
 
 export const PetsList = (): JSX.Element => {
   const [pets, setPets] = useState<Pet[]>([] as Pet[])
@@ -52,9 +52,10 @@ export const PetsList = (): JSX.Element => {
       <SearchForm handleFilter={handleFilter} />
       {
         loading && (
-          <Flex justify='center' padding={16}>
-            <Spinner size='xl' color="#02966a" />
-          </Flex>
+          <div className="flex p-16">
+            <p>Loading...</p>
+            {/* <Spinner size='xl' color="#02966a" /> */}
+          </div>
         )
       }
       {(pets.length > 0) && !loading
@@ -88,7 +89,7 @@ export const PetsList = (): JSX.Element => {
 
           Nenhum resultado encontrado
           <Button
-            variant='link'
+            variant="ghost"
             color='#02966a'
             size='sm'
             _hover={{ color: '#15a97d' }}

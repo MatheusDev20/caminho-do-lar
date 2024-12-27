@@ -4,7 +4,6 @@ import { LoginData, ApplicationUser } from '../interfaces'
 import { HafApi } from '../services/api/haf_backend'
 import { useNavigate } from 'react-router-dom'
 import { getFromLocalStorage } from '../utils/localStorage'
-import { useToast } from '@chakra-ui/react'
 import { UserService } from '../services/api/users'
 import { AuthContextType, User } from '../@types/AuthContext'
 
@@ -15,7 +14,6 @@ interface AuthProviderProps {
 export const AuthContext = createContext <AuthContextType | null>(null)
 
 function AuthProvider ({ children }: AuthProviderProps): JSX.Element {
-  const toast = useToast()
   const navigate = useNavigate()
   const [user, setUser] = useState<User | null>(() => {
     const currUser = getFromLocalStorage('currentUser', null)
@@ -53,14 +51,14 @@ function AuthProvider ({ children }: AuthProviderProps): JSX.Element {
 
       navigate('/home')
     } catch (err) {
-      toast({
-        title: 'Não foi possível realizar o Login',
-        description: 'Verifique suas credenciais e tente novamente',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-        position: 'top-right'
-      })
+      // toast({
+      //   title: 'Não foi possível realizar o Login',
+      //   description: 'Verifique suas credenciais e tente novamente',
+      //   status: 'error',
+      //   duration: 5000,
+      //   isClosable: true,
+      //   position: 'top-right'
+      // })
     }
   }
 
@@ -70,14 +68,14 @@ function AuthProvider ({ children }: AuthProviderProps): JSX.Element {
       localStorage.removeItem('isAuth')
       localStorage.removeItem('token')
       window.location.reload()
-      toast({
-        title: 'Deslogado',
-        description: 'Deslogado com sucesso',
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-        position: 'top-right'
-      })
+      // toast({
+      //   title: 'Deslogado',
+      //   description: 'Deslogado com sucesso',
+      //   status: 'success',
+      //   duration: 3000,
+      //   isClosable: true,
+      //   position: 'top-right'
+      // })
     } catch (err) {
       console.log(err)
     }

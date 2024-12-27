@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { Button, CircularProgress, Flex, FormControl, Heading, Stack, useToast } from '@chakra-ui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ResetPasswordForm } from '../../interfaces/ForgotPasswordData'
 import * as S from './styles'
@@ -13,7 +12,6 @@ export const ResetPassword = (): JSX.Element => {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
-  const toast = useToast()
   const onSubmit: SubmitHandler<ResetPasswordForm> = async (data) => {
     try {
       setLoading(true)
@@ -27,14 +25,14 @@ export const ResetPassword = (): JSX.Element => {
       }
 
       await UserService.resetPassword(newPassword, token)
-      toast({
-        status: 'success',
-        duration: 5000,
-        title: 'Senha atualizada com sucesso',
-        description: 'Redirecionando para a página de Login',
-        isClosable: true,
-        position: 'top-right'
-      })
+      // toast({
+      //   status: 'success',
+      //   duration: 5000,
+      //   title: 'Senha atualizada com sucesso',
+      //   description: 'Redirecionando para a página de Login',
+      //   isClosable: true,
+      //   position: 'top-right'
+      // })
       reset()
       setTimeout(() => {
         navigate('/login')
@@ -47,30 +45,15 @@ export const ResetPassword = (): JSX.Element => {
   }
 
   return (
-    <Flex
-    minH='100vh'
-    paddingY={6}
-    paddingX={12}
-    justify='center'>
-    <Stack
-       p={12}
-       w={'full'}
-       spacing={4}
-       maxW={'md'}
-       marginTop='5rem'
-       maxH={{ base: '360px', md: '420px' }}
-       borderRadius='8'
-       flexDir='column'
-       bg='#1F2029'>
+    <div>
+    <div>
 
         {/* Title */}
-        <Heading lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }} alignSelf='center'>
-           Resetar Senha
-        </Heading>
+        <header>Resetar Senha </header>
         {/* Form to Reset Input */}
         <S.ResetForm onSubmit={handleSubmit(onSubmit)}>
-          <FormControl>
-            <Flex flexDir='column' gap={6}>
+          <div>
+            <div gap={6}>
                 <Input
                     err={errors.newPassword}
                     placeholder='Nova senha...'
@@ -95,8 +78,8 @@ export const ResetPassword = (): JSX.Element => {
                         equal: v => v === getValues('newPassword')
                       }
                     })} />
-            </Flex>
-          </FormControl>
+            </d>
+          </div>
           <Button
             type='submit'
             mt='6'
@@ -106,7 +89,7 @@ export const ResetPassword = (): JSX.Element => {
               {loading ? <CircularProgress isIndeterminate size={5} /> : 'Resetar'}
           </Button>
         </S.ResetForm>
-    </Stack>
-  </Flex>
+    </div>
+  </div>
   )
 }

@@ -1,16 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 
-import {
-  Flex, Text,
-  FormControl,
-  Input,
-  FormHelperText,
-  Button,
-  Stack,
-  Heading,
-  CircularProgress,
-  useToast
-} from '@chakra-ui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ForgotPasswordForm } from '../../interfaces/ForgotPasswordData'
 import * as S from './styles'

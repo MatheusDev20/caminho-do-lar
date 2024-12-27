@@ -1,5 +1,5 @@
 import React, { forwardRef, ForwardRefRenderFunction } from 'react'
-import { Textarea as ChakraTextArea, FormControl, FormLabel, Flex, TextareaProps as ChakraTextAreaProps, FormErrorMessage, Icon, FormHelperText, Text } from '@chakra-ui/react'
+import { Textarea as ChakraTextArea, Flex, TextareaProps as ChakraTextAreaProps, Icon, Text } from '@chakra-ui/react'
 import { FieldError } from 'react-hook-form'
 
 interface TextAreaProps extends ChakraTextAreaProps {

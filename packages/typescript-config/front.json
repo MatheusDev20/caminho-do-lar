@@ -8,14 +8,17 @@
       "DOM.Iterable",
       "ESNext"
     ],
-    "allowJs": false,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "allowJs": false,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,

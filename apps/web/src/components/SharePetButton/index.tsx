@@ -1,4 +1,4 @@
-import { Button, Flex, Text } from '@chakra-ui/react'
+
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import React from 'react'
@@ -6,28 +6,18 @@ import React from 'react'
 export const SharePetButton = (): JSX.Element => {
   const { user } = useAuth()
   return (
-    <Flex
-      paddingX={16}
-      marginTop={12}
-      marginBottom={16}
-      justify='center'
-      width='100%'
+    <div
+      className="flex p-16 mt-16 justify-center w-full"
     >
-      <Button
-        variant='contained'
-        bg='#02966a'
-        size={{ base: 'sm', md: 'lg' }}
-        _hover={{ bg: '#15a97d' }}
+      <button className="bg-[#02966a] text-white text-sm md:text-lg hover:bg-[#15a97d] p-2 md:p-4"
       >
         <Link to={user ? '/cadastrar-pet' : '/criar-usuario'}>
-          <Text
-            fontSize={{ base: '0.9rem', md: 'md' }}
-          >
+          <span>
             Quero divulgar um animal
-          </Text>
+          </span>
         </Link>
 
-      </Button>
-    </Flex >
+      </button>
+    </div>
   )
 }

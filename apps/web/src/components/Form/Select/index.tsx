@@ -1,8 +1,8 @@
 import React, { forwardRef, ForwardRefRenderFunction } from 'react'
-import { Input as ChakraInput, SelectFieldProps, FormControl, FormLabel, Flex, InputProps as ChakraInputProps, FormErrorMessage, Icon, FormHelperText, Text, Select as ChakraSelect } from '@chakra-ui/react'
+import { Input as ChakraInput, NativeSelectFieldProps, FormCon, FormLabel, Flex, InputProps as ChakraInputProps, FormErrorMessage, Icon, FormHelperText, Text, Select as ChakraSelect } from '@chakra-ui/react'
 import { FieldError } from 'react-hook-form'
 
-interface SelectProps extends SelectFieldProps {
+interface SelectProps extends SelectProps {
   label?: string
   err?: FieldError
   icon?: any
@@ -10,6 +10,7 @@ interface SelectProps extends SelectFieldProps {
   errMsg?: string
   size: any
 }
+
 const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps> =
   ({ label, placeholder, err, icon, helperMsg, errMsg, size, ...rest },
     ref) => {

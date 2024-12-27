@@ -1,56 +1,45 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 import React, { forwardRef, ForwardRefRenderFunction } from 'react'
-import { Input as ChakraInput, FormControl, FormLabel, Flex, InputProps as ChakraInputProps, FormErrorMessage, FormHelperText } from '@chakra-ui/react'
 import { FieldError } from 'react-hook-form'
 
-interface InputProps extends ChakraInputProps {
+type InputProps = {
   label?: string
   err?: FieldError
   icon?: any
   helperMsg?: string
   errMsg?: string
+  placeholder?: string
+  type?: string
 }
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> =
-  ({ label, type, placeholder, err, icon, helperMsg, errMsg, ...rest },
+  ({ label, err, placeholder, type, icon, helperMsg, errMsg, ...rest },
     ref) => {
     return <div>
-      <FormControl isInvalid={!(err == null)}>
-        <Flex>
-          {!!label && <FormLabel color='white' fontWeight='bold' >{label}</FormLabel>}
+      <div>
+        <div className='flex justify-between'>
+          {!!label && <label className="text-white font-bold" >{label}</label>}
           {!!icon && icon}
-        </Flex>
+        </div>
 
-        <ChakraInput
+        <input
           type={type}
-          color='#fff'
-          focusBorderColor='green.300'
-          bgColor='gray.900'
-          variant='filled'
           placeholder={placeholder}
-          _placeholder={{ color: 'white' }}
-          _hover={
-            { bgColor: 'gray.900' }
-          }
-          size='lg'
           ref={ref}
           {...rest}
         />
-      
+
         {/* {err && <FormErrorMessage
           fontWeight='bold'
           fontStyle='italic'
           fontSize='0.7rem'>{err.message}</FormErrorMessage>} */}
         {(err == null)
-          ? (<FormHelperText fontStyle={'italic'}>{helperMsg}</FormHelperText>)
+          ? (<p>{helperMsg}</p>)
           : (
-            <FormErrorMessage
-              fontWeight='bold'
-              fontStyle='italic'
-              fontSize='0.7rem'
-            >
-              {errMsg}
-            </FormErrorMessage>
+            <p>{errMsg}
+            </p>
             )}
-      </FormControl>
+      </div>
     </div>
   }
 export const Input = forwardRef(InputBase)

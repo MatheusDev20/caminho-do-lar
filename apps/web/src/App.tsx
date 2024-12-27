@@ -5,9 +5,9 @@ import React from 'react'
 
 export const App = (): JSX.Element => {
   return (
-    <>
-    <Header />
-    <AppRoutes />
-    </>
+    <main>
+      <Header />
+      <AppRoutes />
+    </main>
   )
 }
