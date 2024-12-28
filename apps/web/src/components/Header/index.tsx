@@ -1,137 +1,93 @@
-import { Link as RedirectLink, useNavigate, Link } from 'react-router-dom'
-
-import homeLogo from '../../../assets/home_dog.svg'
-import { useAuth } from '../../context/AuthContext'
-import React from 'react'
+import React from "react";
+import Logo from "../../../assets/home/header1.png";
 
 export const Header = (): JSX.Element => {
-  const { user } = useAuth()
-  const navigate = useNavigate()
   return (
-    <>
-      <div className="bg-[#1F2029] border-b-2 border-t-0 border-r-0 border-l-0 border-gray-500 py-2 px-2">
-        <header className="flex items-center justify-around">
-          {/* DropDown Responsive Icon */}
-          {/* <IconButto
-            size={'sm'}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={'Open Menu'}
-            display={{ base: 'block', sm: 'block', md: 'none' }}
-            bg='gray.700'
-            _hover={{
-              bg: 'gray.500'
-            }}
-            onClick={isOpen ? onClose : onOpen}
-          /> */}
-          {/* HAF Logo and Icon */}
-            <div>
-                <span onClick={() => { navigate('/home') }} >
-                  HELP A FRIEND
-                </span>
-              <img src={homeLogo} />
-            </div>
-
-            {/* Navigation Links Desktop */}
-            <div
-              className="flex flex-row gap-12">
-              {activeLinks.map((link) => (
-                !link.auth && (
-                    <NavLink
-                    redirectTo={link.redirectTo}
-                    key={link.label}>{link.label}</NavLink>
-                )
-              ))}
-            </div>
-
-            {/* Navigation Links Desktop - END */}
-          {/* User profile Info */}
-          {user
-            ? (
-            <div
-              className="items-center flex flex-row gap-4">
-              <p>{user?.name}</p>
-              <img src={user?.avatar} />
-              <button>
-                <p>Signout</p>
-                {/* <Icon
-                  onClick={signOut}
-                  _hover={{ color: 'orange.200' }}
-                  color='orange.400'
-                  as={CgLogOut} /> */}
-              </button>
-            </div>
-              )
-            : <div
-              className="flex flex-row gap-4 p-4">
-              <RedirectLink to='/login'>
-                <button
-                  color='#02966a'>
-                  Entrar
-                </button>
-              </RedirectLink>
-              <RedirectLink to='/criar-usuario'>
-                <button>
-                  Cadastrar
-                </button>
-              </RedirectLink>
-            </div>
-          }
-
-          {/* User profile Info - END */}
-
-        </header>
-
-        {/* {
-          isOpen
-            ? (
-            <Box pb={4} display={{ md: 'none' }}>
-              <Stack as={'nav'} spacing={4}>
-                {activeLinks.map((link) => (
-                  !link.auth && (
-                    <NavLink
-                    redirectTo={link.redirectTo}
-                    key={link.label}>{link.label}</NavLink>
-                  )
-                ))}
-              </Stack>
-            </Box>
-              )
-            : null
-        } */}
-      </div>
-    </>
-  )
-}
-
-const NavLink = ({ children, redirectTo }: NavProps): JSX.Element => (
-  <RedirectLink to={redirectTo} style={{ marginTop: '0.5rem' }}>
-    <Link
-    to="/"
-      color={'orange.400'}
-    >
-      {children}
-    </Link>
-  </RedirectLink >
-)
-
-interface NavProps {
-  children: string
-  redirectTo: string
-}
-const activeLinks = [
-  {
-    label: 'Meus interesses',
-    redirectTo: '/criar-usuario',
-    auth: true
-  },
-  {
-    label: 'Quero Adotar',
-    redirectTo: '/criar-usuario',
-    auth: false
-  },
-  {
-    label: 'Ajudar',
-    redirectTo: '/criar-usuario',
-    auth: false
-  }
-]
+    <header>
+      <nav className="bg-white border-b-gray-200 border border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+          <a className="flex items-center">
+            <img
+              src={Logo}
+              className="ml-6 debug 2xl:h-16 md:h-12 self-center"
+              alt="Caminho do Lar"
+            />
+            {/* <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+              Caminho do Lar
+            </span> */}
+          </a>
+          <div className="flex items-center lg:order-2">
+            <a
+              href="#"
+              className="text-gray-800 dark:text-white transition ease-in-out delay-75 hover:bg-gray-100 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none"
+            >
+              Entrar
+            </a>
+            <a
+              href="#"
+              className="text-white bg-primary-700 hover:bg-primary-800 transition ease-in-out delay-75 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none border-none"
+            >
+              Cadastrar
+            </a>
+            <button
+              data-collapse-toggle="mobile-menu-2"
+              type="button"
+              className="inline-flex items-center p-2 ml-1 text-sm outline-none rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none text-primary-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              aria-controls="mobile-menu-2"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open main menu</span>
+              <svg
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              <svg
+                className="hidden w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div
+            className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+            id="mobile-menu-2"
+          >
+            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+              <li>
+                <a
+                  href="#"
+                  className="block text-primary-600 py-2 pr-4 pl-3 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Sobre
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block py-2 pr-4 pl-3 text-primary-600 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Como ajudar
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+  );
+};

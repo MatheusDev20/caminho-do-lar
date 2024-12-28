@@ -214,6 +214,9 @@ importers:
       eslint:
         specifier: ^8.0.1
         version: 8.57.1
+      eslint-config-prettier:
+        specifier: ^9.1.0
+        version: 9.1.0(eslint@8.57.1)
       eslint-config-standard-with-typescript:
         specifier: ^26.0.0
         version: 26.0.0(@typescript-eslint/eslint-plugin@5.62.0)(eslint-plugin-import@2.31.0)(eslint-plugin-n@15.7.0)(eslint-plugin-promise@6.6.0)(eslint@8.57.1)(typescript@5.7.2)
@@ -226,6 +229,9 @@ importers:
       eslint-plugin-n:
         specifier: ^15.0.0
         version: 15.7.0(eslint@8.57.1)
+      eslint-plugin-prettier:
+        specifier: ^5.2.1
+        version: 5.2.1(@types/eslint@8.56.12)(eslint-config-prettier@9.1.0)(eslint@8.57.1)(prettier@3.3.3)
       eslint-plugin-promise:
         specifier: ^6.0.0
         version: 6.6.0(eslint@8.57.1)
