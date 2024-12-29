@@ -1,5 +1,14 @@
 {
   "extends": "@repo/typescript-config/front.json",
   "exclude": ["node_modules"],
-  "include": ["src", "./tailwind.config.ts"]
+  "include": ["src", "./tailwind.config.ts"],
+  "compilerOptions": { 
+    "moduleResolution": "Node", 
+    "composite": true,
+    "rootDir": ".",
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"],
+    },
+    } 
 }
