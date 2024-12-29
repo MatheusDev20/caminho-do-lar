@@ -9,7 +9,7 @@ export const Header = (): JSX.Element => {
           <a className="flex items-center">
             <img
               src={Logo}
-              className="ml-6 debug 2xl:h-16 md:h-12 self-center"
+              className="ml-6 2xl:h-12 md:h-12 self-center"
               alt="Caminho do Lar"
             />
             {/* <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">

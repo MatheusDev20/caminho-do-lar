@@ -6,14 +6,17 @@ import RightPaw from "../../../assets/home/right-section.png";
 
 export const Home: React.FC = () => {
   return (
-    <main className="flex flex-col md:p-12 gap-12 relative">
+    <main className="flex flex-col md:p-12 gap-12">
       {/* HighLight message */}
 
-      <section className="flex overflow-hidden relative items-center bg-[#fdfdfd] justify-center md:min-h-[200px] shadow-md p-4 rounded-lg">
+      <section
+        className="flex mx-auto w-full rounded-xl overflow-hidden max-w-[1470px] relative items-center justify-center
+       2xl:min-h-[px] bg-gradient-to-r from-blue-50 to-blue-100 md:min-h-[200px] shadow-lg p-4 transition-transform transform hover:scale-105 duration-300"
+      >
         <img
           src={LeftPaw}
           alt="Left Paw"
-          className="absolute top-[-4px] left-[5%] 2xl:h-56 md:h-32"
+          className="absolute top-[-0.5px] left-[5%] 2xl:h-36 md:h-28"
         />
         <h1 className="text-center text-sm md:text-2xl z-10">
           Encontramos{" "}
@@ -25,7 +28,7 @@ export const Home: React.FC = () => {
         <img
           src={RightPaw}
           alt="Right Paw"
-          className="absolute bottom-[-6px] right-[5%] 2xl:h-48 md:h-32"
+          className="absolute bottom-[-6px] right-[5%] 2xl:h-36 md:h-28"
         />
       </section>
 
