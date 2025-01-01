@@ -1,56 +1,87 @@
-import React, { forwardRef, ForwardRefRenderFunction } from 'react'
-import { Input as ChakraInput, NativeSelectFieldProps, FormCon, FormLabel, Flex, InputProps as ChakraInputProps, FormErrorMessage, Icon, FormHelperText, Text, Select as ChakraSelect } from '@chakra-ui/react'
-import { FieldError } from 'react-hook-form'
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { ChevronUpIcon } from "../../../components/icons/chevron-up.icon";
+import { ChevronDownIcon } from "../../../components/icons/chevron.icon";
+import React from "react";
 
-interface SelectProps extends SelectProps {
-  label?: string
-  err?: FieldError
-  icon?: any
-  helperMsg?: string
-  errMsg?: string
-  size: any
+interface Options {
+  imgLink: string;
+  name: string;
+}
+interface Props {
+  options: Options[];
+  placeholder: string;
+  label: string;
 }
 
-const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps> =
-  ({ label, placeholder, err, icon, helperMsg, errMsg, size, ...rest },
-    ref) => {
-    return <>
-      <FormControl isInvalid={!(err == null)}>
-        <Flex>
-          {!!label && <FormLabel color='white' fontWeight='bold' >{label}</FormLabel>}
-          {!!icon && icon}
-        </Flex>
+export const Select = ({ options, placeholder, label }: Props): JSX.Element => {
+  const [search, setSearch] = React.useState("");
+  const [openDropDown, setOpenDropDown] = React.useState(false);
 
-        <ChakraSelect
-          color='#fff'
-          focusBorderColor='green.300'
-          bgColor='gray.900'
-          variant='filled'
-          placeholder={placeholder}
-          _placeholder={{ color: 'white' }}
-          _hover={
-            { bgColor: 'gray.900' }
-          }
-          size={size}
-          ref={ref}
-          {...rest}
-        />
-        {/* {err && <FormErrorMessage
-          fontWeight='bold'
-          fontStyle='italic'
-          fontSize='0.7rem'>{err.message}</FormErrorMessage>} */}
-        {(err == null)
-          ? (<FormHelperText fontStyle={'italic'}>{helperMsg}</FormHelperText>)
-          : (
-            <FormErrorMessage
-              fontWeight='bold'
-              fontStyle='italic'
-              fontSize='0.7rem'
-            >
-              {errMsg}
-            </FormErrorMessage>
+  const handleChange = (e: any) => {
+    setSearch(e.target.value);
+  };
+
+  return (
+    <div className="flex flex-col mt-7 items-center">
+      <div className="w-full flex flex-col items-center h-64">
+        <div className="w-full px-4">
+          <div className="flex flex-col items-center relative">
+            <div className="w-full">
+              <label className="block text-md text-gray-600">{label}</label>
+              <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
+                <div className="flex flex-auto flex-wrap"></div>
+                <input
+                  onChange={handleChange}
+                  value={search}
+                  disabled
+                  placeholder={placeholder}
+                  className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                />
+                <div
+                  onClick={() => {
+                    setOpenDropDown(!openDropDown);
+                  }}
+                  className="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 hover:bg-slate-50"
+                >
+                  <button className="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">
+                    {openDropDown ? <ChevronDownIcon /> : <ChevronUpIcon />}
+                  </button>
+                </div>
+              </div>
+            </div>
+            {options.length > 0 && openDropDown && (
+              <div className="absolute shadow bg-white top-[100%] z-40 w-full lef-0 rounded max-h-[300px] overflow-y-auto">
+                <div className="flex flex-col w-full">
+                  {options.map((option, i) => (
+                    <React.Fragment key={i}>
+                      <div className="cursor-pointer w-full border-gray-100 hover:bg-teal-100">
+                        <div className="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
+                          <div className="w-6 flex flex-col items-center">
+                            <div className="flex relative bg-orange-500 justify-center items-center m-1 mr-2 w-6 h-6 rounded-full">
+                              <img
+                                className="rounded-full"
+                                alt={option.name}
+                                src={option.imgLink}
+                              />
+                            </div>
+                          </div>
+                          <div className="w-full items-center flex">
+                            <div className="mx-2 -mt-1">{option.name}</div>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Horizontal line */}
+                      {i < options.length - 1 && (
+                        <hr className="border-t border-gray-100" />
+                      )}
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
             )}
-      </FormControl>
-    </>
-  }
-export const Select = forwardRef(SelectBase)
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
