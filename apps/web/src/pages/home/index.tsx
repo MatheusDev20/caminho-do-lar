@@ -4,7 +4,7 @@ import React from "react";
 import LeftPaw from "../../../assets/home/left-section.png";
 import RightPaw from "../../../assets/home/right-section.png";
 import { FunnelIcon } from "../../components/icons/funner.icon";
-import { Select } from "../../components/Form/Select";
+import { Filter } from "../../components/Filter/index";
 
 export const Home: React.FC = () => {
   return (
@@ -45,20 +45,7 @@ export const Home: React.FC = () => {
 
           {/* Placeholder for filter options */}
           <div className="flex flex-col gap-4">
-            <Select
-              label="Espécie"
-              options={[
-                {
-                  imgLink: "https://www.svgrepo.com/show/2046/dog.svg",
-                  name: "Cães",
-                },
-                {
-                  imgLink: "https://www.svgrepo.com/show/85124/cat.svg",
-                  name: "Gatos",
-                },
-              ]}
-              placeholder="Selecione"
-            />
+            <Filter />
             <label>
               <span className="block mb-1 font-medium text-gray-700">
                 Idade:
