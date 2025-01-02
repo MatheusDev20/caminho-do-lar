@@ -1,32 +1,19 @@
+import React from "react";
 
-import { Flex, Link, Text } from '@chakra-ui/react'
-import React from 'react'
 export const Footer = (): JSX.Element => {
   return (
-    <div>
-      <Flex
-        padding={5}
-        justify='center'
-        marginTop='auto'
-        background='#1F2029'
-      >
-        <Text
-          fontSize={{ base: 'sm', md: 'md' }}
-          fontWeight='bold'
-          color='#fff'
-          letterSpacing={0.5}
+    <footer className="flex flex-col items-center p-6 bg-primary-900 text-gray-100">
+      <p className="mb-2 text-sm">
+        Developed with 💛 by{" "}
+        <a
+          href="https://github.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-300 hover:text-gray-100 transition-colors"
         >
-          Develop with 💛 by
-          <Link
-            href="https://github.com/MatheusDev20"
-            target="_blank"
-            color='blue.300'
-            ml='0.3rem'
-          >
-            MatheusDev20
-          </Link>
-        </Text>
-      </Flex>
-    </div>
-  )
-}
+          Me
+        </a>
+      </p>
+    </footer>
+  );
+};

@@ -1,5 +1,5 @@
 export interface Filters {
-  gender: string
-  specie: string
-  size: string
+  gender: string;
+  specie: string;
+  size: string;
 }

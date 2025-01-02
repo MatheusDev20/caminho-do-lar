@@ -4,7 +4,7 @@ import { ChevronDownIcon } from "../../../components/icons/chevron.icon";
 import React from "react";
 
 interface Options {
-  imgLink: string;
+  imgLink?: string;
   name: string;
 }
 interface Props {
@@ -23,11 +23,11 @@ export const Select = ({
   onChange,
 }: Props): JSX.Element => {
   const [openDropDown, setOpenDropDown] = React.useState(false);
-  console.log("On", onChange);
+
   return (
-    <div className="flex flex-col mt-7 items-center">
-      <div className="w-full flex flex-col items-center h-64">
-        <div className="w-full px-4">
+    <div className="flex flex-col mt-5 items-center">
+      <div className="w-full flex flex-col items-center">
+        <div className="w-full">
           <div className="flex flex-col items-center relative">
             <div className="w-full">
               <label className="block text-md text-gray-600">{label}</label>
@@ -64,13 +64,15 @@ export const Select = ({
                     >
                       <div className="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
                         <div className="w-6 flex flex-col items-center">
-                          <div className="flex relative bg-orange-500 justify-center items-center m-1 mr-2 w-6 h-6 rounded-full">
-                            <img
-                              className="rounded-full"
-                              alt={option.name}
-                              src={option.imgLink}
-                            />
-                          </div>
+                          {option.imgLink && (
+                            <div className="flex relative bg-orange-500 justify-center items-center m-1 mr-2 w-6 h-6 rounded-full">
+                              <img
+                                className="rounded-full"
+                                alt={option.name}
+                                src={option.imgLink}
+                              />
+                            </div>
+                          )}
                         </div>
                         <div className="w-full items-center flex">
                           <div className="mx-2 -mt-1">{option.name}</div>

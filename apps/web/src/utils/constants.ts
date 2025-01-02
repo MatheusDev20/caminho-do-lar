@@ -20,11 +20,41 @@ export const NavLinks: NavItem[] = [
 
 export const DogSpeciesOptions = [
   {
+    name: "Todos",
+  },
+  {
     imgLink: "https://www.svgrepo.com/show/2046/dog.svg",
     name: "Cães",
   },
   {
     imgLink: "https://www.svgrepo.com/show/85124/cat.svg",
     name: "Gatos",
+  },
+];
+
+export const DogGenderOptions = [
+  {
+    name: "Todos",
+  },
+  {
+    name: "Macho",
+  },
+  {
+    name: "Fêmea",
+  },
+];
+
+export const DogSizeOptions = [
+  {
+    name: "Todos",
+  },
+  {
+    name: "Grande",
+  },
+  {
+    name: "Médio",
+  },
+  {
+    name: "Pequeno",
   },
 ];
