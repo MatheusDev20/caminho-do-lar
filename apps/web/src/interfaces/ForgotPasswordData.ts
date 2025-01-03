@@ -1,8 +1,8 @@
 export interface ForgotPasswordForm {
-  email: string
+  email: string;
 }
 
 export interface ResetPasswordForm {
-  newPassword: string
-  repeatPassword: string
+  newPassword: string;
+  repeatPassword: string;
 }

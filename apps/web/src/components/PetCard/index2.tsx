@@ -7,7 +7,7 @@ interface Props {
 
 export const PetCard = ({ petInformation }: Props): JSX.Element => {
   return (
-    <div className="bg-white cursor-pointer rounded-lg shadow flex flex-col items-stretch">
+    <div className="bg-white cursor-pointer rounded-lg shadow flex flex-col items-stretch transition-transform transform hover:scale-105 duration-300 group">
       <header
         style={{
           backgroundImage: `url(https://www.soidog.org/sites/default/files/Dogs_for_adoption.jpg)`,
@@ -21,7 +21,7 @@ export const PetCard = ({ petInformation }: Props): JSX.Element => {
           <Heart tClass="w-4 h-4 text-white font-semibold group-hover:text-white transition-colors" />
         </button>
       </header>
-      <section className="flex gap-2 debug items-center flex-col p-4">
+      <section className="flex gap-2 items-center flex-col p-4 transition ease-in-out delay-75 group-hover:border-primary-600 group-hover:border">
         <h3 className="md:text-2xl text-sm font-bold text-center text-primary-700">
           {petInformation.name}
         </h3>
