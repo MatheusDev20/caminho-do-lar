@@ -5,10 +5,12 @@ import React from "react";
 
 export const App = (): JSX.Element => {
   return (
-    <main className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <AppRoutes />
+      <div className="flex-grow">
+        <AppRoutes />
+      </div>
       <Footer />
-    </main>
+    </div>
   );
 };

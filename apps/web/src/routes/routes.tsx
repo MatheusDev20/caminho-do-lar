@@ -1,6 +1,7 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import React from "react";
 import { Home } from "../pages/home";
+import { LoginPage } from "../pages/Login";
 // import { LoginPage } from '../pages/Login'
 // import { SignUpPage } from '../pages/Signup'
 // import { RegisterPetPage } from '../pages/RegisterPet'
@@ -15,7 +16,7 @@ export const AppRoutes = (): JSX.Element => {
     <Routes>
       <Route path="/" element={<Navigate to="/home" replace />} />
       <Route path="/home" element={<Home />} />
-      {/* <Route path="/login" element={<LoginPage />} /> */}
+      <Route path="/login" element={<LoginPage />} />
 
       {/* <Route path='/criar-usuario' element={<SignUpPage />} /> */}
 
