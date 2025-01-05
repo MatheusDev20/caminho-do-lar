@@ -13,9 +13,7 @@ export default function authorization(request: Request, response: Response, next
   void {
   const authHeader = request.headers.authorization;
 
-  if (!authHeader) {
-    throw new AppError('User is not Logged in ( Token is not provided )', 401);
-  }
+  if (!authHeader) throw new AppError('User is not Logged in ( Token is not provided )', 401);
 
   const [, token] = authHeader.split(' ');
   const { secret } = authConfig;
