@@ -2,33 +2,29 @@
 import { NextFunction } from 'express';
 import passport from 'passport';
 
-export const checkAuthenticated = (req: any, res: any, next: NextFunction): void => {
-  console.log('Req', req);
+export const checkAuth = (req: any, res: any, next: NextFunction): object | void => {
+  // console.log('REQ', req.isAuthenticated());
+  console.log('REQ', req.isAuthenticated());
+  console.log('My Data', req.user);
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('login');
+  return { message: 'You are not authenticated to perform this request' };
 };
 
-const checkLoggedIn = (req: any, res: any, next: NextFunction) => {
-  if (req.isAuthenticated()) {
-    return res.status(200).json({ message: 'User already logged in' });
-  }
-
+export const checkLoggedIn = (req: any, res: any, next: NextFunction) => {
+  if (req.isAuthenticated()) { return res.status(200).json({ message: 'User already logged in' }); }
   next();
 };
 
-export const authenticateLocal = (req: any, res: any, next: NextFunction) => {
+export const logIn = (req: any, res: any, next: NextFunction) => {
   passport.authenticate('local', (passErr: any, user: any, info: any) => {
-    if (passErr) {
-      return res.status(500).json({ message: 'Internal server error' });
+    if (passErr || !user) {
+      return res.status(401).json({ message: info ? info.message : 'Unauthorized' });
     }
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-    req.logIn(user, (err: any) => {
-      if (err) {
+    req.logIn(user, (loginErr: any) => {
+      if (loginErr) {
         return res.status(500).json({ message: 'Login failed' });
       }
-      next();
+      return res.status(200).json({ message: 'Logged in successfully', id: user.id });
     });
   })(req, res, next);
 };
