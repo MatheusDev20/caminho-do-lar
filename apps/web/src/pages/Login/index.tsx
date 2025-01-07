@@ -1,31 +1,53 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
-import { Input } from "../../components/Form/Input";
-import { LoginData } from "../../interfaces";
-import { Link as RedirectLink } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import React, { useState } from "react";
+import React from "react";
 
-export const LoginPage: React.FC = () => {
-  const [loading, setLoading] = useState(false);
+interface LoginModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm<LoginData>();
-  // const { signIn } = useAuth();
+export const LoginModal = ({
+  isOpen,
+  onClose,
+}: LoginModalProps): JSX.Element | null => {
+  if (!isOpen) return null;
 
-  // const onSubmitLoginForm: SubmitHandler<LoginData> = async (
-  //   data: LoginData,
-  // ): Promise<void> => {
-  //   const incomeLoginRequestData = {
-  //     email: data.email,
-  //     password: data.password,
-  //   };
-  //   // TODO: Criar interação em tela para mensagem de Erro
-  //   setLoading(true);
-  //   await signIn(incomeLoginRequestData);
-  //   setLoading(false);
-  // };
-  return <div>Login Rendered</div>;
+  return (
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-lg p-6 w-[90%] max-w-md"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        <h2 className="text-xl font-semibold mb-4">Login</h2>
+        <form className="flex flex-col gap-4">
+          <input
+            type="email"
+            placeholder="Email"
+            className="border rounded p-2"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className="border rounded p-2"
+          />
+          <button
+            type="submit"
+            className="bg-primary-700 text-white rounded p-2 hover:bg-primary-800"
+          >
+            Log In
+          </button>
+        </form>
+        <button
+          className="mt-4 text-sm text-gray-500 hover:text-gray-700"
+          onClick={onClose}
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
 };
