@@ -3,11 +3,8 @@ import { NextFunction } from 'express';
 import passport from 'passport';
 
 export const checkAuth = (req: any, res: any, next: NextFunction): object | void => {
-  // console.log('REQ', req.isAuthenticated());
-  console.log('REQ', req.isAuthenticated());
-  console.log('My Data', req.user);
   if (req.isAuthenticated()) { return next(); }
-  return { message: 'You are not authenticated to perform this request' };
+  return res.status(401).json({ message: 'You are not authenticated to perform this request' });
 };
 
 export const checkLoggedIn = (req: any, res: any, next: NextFunction) => {
@@ -20,6 +17,7 @@ export const logIn = (req: any, res: any, next: NextFunction) => {
     if (passErr || !user) {
       return res.status(401).json({ message: info ? info.message : 'Unauthorized' });
     }
+
     req.logIn(user, (loginErr: any) => {
       if (loginErr) {
         return res.status(500).json({ message: 'Login failed' });
