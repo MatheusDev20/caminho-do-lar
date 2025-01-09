@@ -1,45 +1,54 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable @typescript-eslint/consistent-type-definitions */
-import React, { forwardRef, ForwardRefRenderFunction } from 'react'
-import { FieldError } from 'react-hook-form'
+import React from "react";
+import clsx from "clsx";
 
-type InputProps = {
-  label?: string
-  err?: FieldError
-  icon?: any
-  helperMsg?: string
-  errMsg?: string
-  placeholder?: string
-  type?: string
+interface Props {
+  placeholder: string;
+  name: string;
+  type: string;
+  addonIcon?: any; // Optional addon icon
+  iconPosition?: "left" | "right"; // Icon position
+  size?: "sm" | "md" | "lg";
+  custom?: string; // Accepts a custom percentage
 }
-const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> =
-  ({ label, err, placeholder, type, icon, helperMsg, errMsg, ...rest },
-    ref) => {
-    return <div>
-      <div>
-        <div className='flex justify-between'>
-          {!!label && <label className="text-white font-bold" >{label}</label>}
-          {!!icon && icon}
+
+export const Input = ({
+  size,
+  custom,
+  addonIcon,
+  iconPosition = "left", // Default icon position
+  ...rest
+}: Props): JSX.Element => {
+  console.log("a", addonIcon);
+  return (
+    <div
+      className={clsx(
+        "flex items-center border border-gray-300 rounded focus-within:ring-2 focus-within:ring-primary-700",
+        custom
+          ? `w-[${custom}]`
+          : {
+              "w-[30%]": size === "sm",
+              "w-[60%]": size === "md",
+              "w-[90%]": size === "lg",
+            },
+      )}
+    >
+      {/* Addon icon on the left */}
+      {addonIcon && iconPosition === "left" && (
+        <div className="px-2 max-w-[15%] flex items-center justify-center">
+          {addonIcon}
         </div>
+      )}
 
-        <input
-          type={type}
-          placeholder={placeholder}
-          ref={ref}
-          {...rest}
-        />
+      {/* Input field */}
+      <input
+        {...rest}
+        className="p-2 flex-1 focus:outline-none rounded-l-none border-none"
+      />
 
-        {/* {err && <FormErrorMessage
-          fontWeight='bold'
-          fontStyle='italic'
-          fontSize='0.7rem'>{err.message}</FormErrorMessage>} */}
-        {(err == null)
-          ? (<p>{helperMsg}</p>)
-          : (
-            <p>{errMsg}
-            </p>
-            )}
-      </div>
+      {/* Addon icon on the right */}
+      {addonIcon && iconPosition === "right" && (
+        <div className="px-3 text-gray-500">{addonIcon}</div>
+      )}
     </div>
-  }
-export const Input = forwardRef(InputBase)
+  );
+};

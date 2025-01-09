@@ -1,6 +1,5 @@
 import React from "react";
 import Logo from "../../../assets/home/header1.png";
-import { Link } from "react-router-dom";
 
 interface Props {
   isLoginOpen: boolean;

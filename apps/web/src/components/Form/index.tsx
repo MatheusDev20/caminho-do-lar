@@ -1,3 +1,3 @@
-// export * from "./Input";
-export * from "./Select";
-// export * from "./UploadInput";
+export * from "./Select/index";
+export * from "./UploadInput/index";
+export * from "./Input/index";

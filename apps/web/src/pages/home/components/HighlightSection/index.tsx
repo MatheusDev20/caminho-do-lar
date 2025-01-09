@@ -6,7 +6,7 @@ export const HighlightSection = (): JSX.Element => {
   return (
     <section
       className="flex mx-auto w-full rounded-xl overflow-hidden max-w-[1470px] relative items-center justify-center
-   2xl:min-h-[px] bg-gradient-to-r from-blue-50 to-blue-100 md:min-h-[200px] shadow-lg p-4 transition-transform transform hover:scale-105 duration-300"
+   2xl:min-h-[px] bg-gradient-to-r from-blue-50 to-blue-100 md:min-h-[200px] shadow-lg p-4"
     >
       <img
         src={LeftPaw}

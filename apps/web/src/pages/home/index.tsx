@@ -2,7 +2,7 @@ import React from "react";
 import { FunnelIcon } from "../../components/icons/funner.icon";
 import { Filter } from "../../components/Filter/index";
 import { useFilters } from "../../hooks/useFilters";
-import { PetCard } from "../../components/PetCard/index2";
+import { PetCard } from "../../components/PetCard";
 import { HighlightSection } from "./components/HighlightSection";
 
 export const Home: React.FC = () => {

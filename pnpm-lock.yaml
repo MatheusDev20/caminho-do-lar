@@ -195,6 +195,9 @@ importers:
       axios:
         specifier: ^1.7.9
         version: 1.7.9
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       date-fns:
         specifier: ^2.29.3
         version: 2.30.0

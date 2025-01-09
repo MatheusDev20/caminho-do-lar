@@ -41,7 +41,11 @@ export const Filter = ({ filters, change }: Props): JSX.Element => {
           change((prev) => ({ ...prev, size: e.name }));
         }}
       />
-      <button className="text-white bg-primary-700 hover:bg-primary-800 transition ease-in-out w-1/2 mt-6 self-center delay-75 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none border-none">
+      <button
+        className="text-white bg-primary-700 hover:bg-primary-800 transition ease-in-out w-1/2 mt-6 
+          self-center delay-75 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2
+        dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none border-none"
+      >
         Aplicar
       </button>
     </div>
