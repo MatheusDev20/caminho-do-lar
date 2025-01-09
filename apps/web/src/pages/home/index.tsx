@@ -2,8 +2,8 @@ import React from "react";
 import { FunnelIcon } from "../../components/icons/funner.icon";
 import { Filter } from "../../components/Filter/index";
 import { useFilters } from "../../hooks/useFilters";
-import { PetCard } from "../../components/PetCard";
 import { HighlightSection } from "./components/HighlightSection";
+import { PetCard } from "../../components/PetCard";
 
 export const Home: React.FC = () => {
   const { filters, change, clear } = useFilters();
