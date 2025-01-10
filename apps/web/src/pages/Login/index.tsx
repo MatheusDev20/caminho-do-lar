@@ -4,6 +4,8 @@ import { Input } from "../../components/Form";
 import { EmailIcon } from "../../components/icons/email";
 
 import { Lock } from "../../components/icons/lock";
+import { isValid } from "date-fns";
+import { isValideEMail } from "../../utils/utils";
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -13,7 +15,19 @@ export const LoginModal = ({
   isOpen,
   onClose,
 }: LoginModalProps): JSX.Element | null => {
+  const [loginInput, setLoginInput] = React.useState({
+    email: "",
+    password: "",
+  });
+
   if (!isOpen) return null;
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setLoginInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  console.log("Email", loginInput.email);
+  console.log("Password", loginInput.password);
 
   return (
     <div
@@ -52,17 +66,27 @@ export const LoginModal = ({
         <form className="flex flex-col gap-4 mt-4 items-center">
           <Input
             type="email"
+            label="Email"
+            value={loginInput.email}
             placeholder="Email"
+            onChange={handleInputChange}
             name="email"
-            size="lg"
+            variant="lg"
+            validateFn={isValideEMail}
+            validationMessage="Email inválido"
             addonIcon={<EmailIcon tClass="h-6 w-6" />}
           />
           <Input
             type="password"
+            label="Senha"
+            value={loginInput.password}
+            onChange={handleInputChange}
+            validateFn={(v) => v.lenght > 8}
+            validationMessage="A senha deve ter no mínimo 8 caracteres"
             addonIcon={<Lock tClass="h-6 w-6" />}
             placeholder="Senha..."
             name="password"
-            size="lg"
+            variant="lg"
           />
 
           <button

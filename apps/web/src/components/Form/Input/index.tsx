@@ -1,54 +1,106 @@
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 import clsx from "clsx";
 
-interface Props {
-  placeholder: string;
-  name: string;
-  type: string;
-  addonIcon?: any; // Optional addon icon
-  iconPosition?: "left" | "right"; // Icon position
-  size?: "sm" | "md" | "lg";
-  custom?: string; // Accepts a custom percentage
-}
+type Props = InputHTMLAttributes<HTMLInputElement> & {
+  label: string;
+  addonIcon?: React.ReactNode;
+  iconPosition?: "left" | "right";
+  variant?: "sm" | "md" | "lg";
+  custom?: string;
+  validateFn: (value: any) => boolean;
+  validationMessage?: string;
+};
 
 export const Input = ({
-  size,
+  variant,
+  label,
   custom,
   addonIcon,
-  iconPosition = "left", // Default icon position
+  iconPosition = "left",
+  validationMessage,
+  validateFn = () => true,
   ...rest
 }: Props): JSX.Element => {
-  console.log("a", addonIcon);
+  const isInvalid = rest.value && !validateFn(rest.value);
+
   return (
     <div
       className={clsx(
-        "flex items-center border border-gray-300 rounded focus-within:ring-2 focus-within:ring-primary-700",
+        "flex flex-col gap-2",
         custom
           ? `w-[${custom}]`
           : {
-              "w-[30%]": size === "sm",
-              "w-[60%]": size === "md",
-              "w-[90%]": size === "lg",
-            },
+              "w-1/3": variant === "sm",
+              "w-2/3": variant === "md",
+              "w-full": variant === "lg",
+            }
       )}
     >
-      {/* Addon icon on the left */}
-      {addonIcon && iconPosition === "left" && (
-        <div className="px-2 max-w-[15%] flex items-center justify-center">
-          {addonIcon}
+      <label htmlFor={rest.name} className="text-sm font-medium text-gray-700">
+        {label}
+      </label>
+
+      <div
+        className={clsx(
+          "flex items-center border rounded-lg p-2 transition-shadow duration-300",
+          isInvalid
+            ? "border-red-500 ring-2 ring-red-500"
+            : "border-gray-300 focus-within:ring-2 focus-within:ring-primary-700",
+          "shadow-sm focus-within:shadow-md"
+        )}
+      >
+        {/* Addon icon on the left */}
+        {addonIcon && iconPosition === "left" && (
+          <div
+            className="px-2 flex items-center justify-center"
+            aria-hidden="true"
+          >
+            {React.cloneElement(addonIcon as any, { className: "w-5 h-5 text-gray-500" })}
+          </div>
+        )}
+
+        {/* Input field */}
+        <input
+          {...rest}
+          id={rest.name}
+          className="p-2 flex-1 focus:outline-none border-none text-gray-700 placeholder-gray-400 rounded-lg"
+        />
+
+        {/* Addon icon on the right */}
+        {addonIcon && iconPosition === "right" && (
+          <div
+            className="px-2 flex items-center justify-center"
+            aria-hidden="true"
+          >
+            {React.cloneElement(addonIcon as any, { className: "w-5 h-5 text-gray-500" })}
+          </div>
+        )}
+      </div>
+
+      {/* Real-time validation */}
+      <div
+        id={`${rest.name}-error`}
+        className={clsx(
+          "text-red-500 text-xs pl-2 mt-1 transition-opacity duration-300",
+          isInvalid ? "opacity-100" : "opacity-0 pointer-events-none"
+        )}
+      >
+        <div className="flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-4 h-4"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M18 10c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8zm-7 4a1 1 0 112 0 1 1 0 01-2 0zM9 7a1 1 0 000 2h2a1 1 0 100-2H9z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <span>{validationMessage}</span>
         </div>
-      )}
-
-      {/* Input field */}
-      <input
-        {...rest}
-        className="p-2 flex-1 focus:outline-none rounded-l-none border-none"
-      />
-
-      {/* Addon icon on the right */}
-      {addonIcon && iconPosition === "right" && (
-        <div className="px-3 text-gray-500">{addonIcon}</div>
-      )}
+      </div>
     </div>
   );
 };

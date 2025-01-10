@@ -5,12 +5,14 @@ import {
   DogSizeOptions,
   DogSpeciesOptions,
 } from "../../utils/constants";
-import { Filters } from "@/interfaces";
-import { FilterParams } from "@/hooks/useFilters";
-interface Props {
+import { Filters } from "../../interfaces";
+import { FilterParams } from "../../hooks/useFilters";
+
+type Props = {
   filters: Filters;
   change: Dispatch<SetStateAction<FilterParams>>;
 }
+
 export const Filter = ({ filters, change }: Props): JSX.Element => {
   return (
     <div className="flex px-4 flex-col">
