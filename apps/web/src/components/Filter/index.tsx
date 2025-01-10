@@ -11,7 +11,7 @@ import { FilterParams } from "../../hooks/useFilters";
 type Props = {
   filters: Filters;
   change: Dispatch<SetStateAction<FilterParams>>;
-}
+};
 
 export const Filter = ({ filters, change }: Props): JSX.Element => {
   return (

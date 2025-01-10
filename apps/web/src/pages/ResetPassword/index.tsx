@@ -4,7 +4,7 @@ import { ResetPasswordForm } from '../../interfaces/ForgotPasswordData'
 import * as S from './styles'
 import React, { useState } from 'react'
 import { Input } from '../../components/Form/Input'
-import { UserService } from '../../services/api/users'
+import { UserService } from '../../api/users'
 import { useNavigate } from 'react-router-dom'
 
 export const ResetPassword = (): JSX.Element => {

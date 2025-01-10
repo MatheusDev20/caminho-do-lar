@@ -24,10 +24,18 @@ export default (app: Express): void => {
     secret: process.env.SESSION_SECRET as string,
     resave: false,
     saveUninitialized: false,
+    // cookie: { secure: false, sameSite: 'strict' }, // PRD
+    cookie: {
+      sameSite: 'none', // Allow cookies across different ports
+      secure: false, // No need for secure in local development
+    },
   }));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use('/files', express.static(upload.directory));
   app.use(jsonParser);
-  app.use(cors());
+  app.use(cors({
+    origin: 'http://localhost:3000', // Replace with your frontend URL
+    credentials: true, // Allow cookies to be sent and received
+  }));
 };

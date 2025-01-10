@@ -192,6 +192,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@tanstack/react-query':
+        specifier: ^5.63.0
+        version: 5.63.0(react@19.0.0)
       axios:
         specifier: ^1.7.9
         version: 1.7.9
@@ -1363,6 +1366,19 @@ packages:
 
   /@sqltools/formatter@1.2.5:
     resolution: {integrity: sha512-Uy0+khmZqUrUGm5dmMqVlnvufZRSK0FbYzVgp0UMstm+F5+W2/jnEEQyc9vo1ZR/E5ZI/B1WjjoTqBqwJL6Krw==}
+    dev: false
+
+  /@tanstack/query-core@5.62.16:
+    resolution: {integrity: sha512-9Sgft7Qavcd+sN0V25xVyo0nfmcZXBuODy3FVG7BMWTg1HMLm8wwG5tNlLlmSic1u7l1v786oavn+STiFaPH2g==}
+    dev: false
+
+  /@tanstack/react-query@5.63.0(react@19.0.0):
+    resolution: {integrity: sha512-QWizLzSiog8xqIRYmuJRok9VELlXVBAwtINgVCgW1SNvamQwWDO5R0XFSkjoBEj53x9Of1KAthLRBUC5xmtVLQ==}
+    peerDependencies:
+      react: ^18 || ^19
+    dependencies:
+      '@tanstack/query-core': 5.62.16
+      react: 19.0.0
     dev: false
 
   /@tootallnate/quickjs-emscripten@0.23.0:

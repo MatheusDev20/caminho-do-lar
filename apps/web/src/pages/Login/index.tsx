@@ -4,8 +4,9 @@ import { Input } from "../../components/Form";
 import { EmailIcon } from "../../components/icons/email";
 
 import { Lock } from "../../components/icons/lock";
-import { isValid } from "date-fns";
 import { isValideEMail } from "../../utils/utils";
+import { useMutation } from "@tanstack/react-query";
+import { logIn } from "../../api/users";
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -26,8 +27,15 @@ export const LoginModal = ({
     setLoginInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  console.log("Email", loginInput.email);
-  console.log("Password", loginInput.password);
+  const mutation = useMutation({
+    mutationFn: async (loginData: any) => {
+      return await logIn(loginData);
+    },
+
+    onSuccess: (data) => {
+      console.log("Logou", data);
+    },
+  });
 
   return (
     <div
@@ -63,7 +71,7 @@ export const LoginModal = ({
         </div>
 
         {/* Form */}
-        <form className="flex flex-col gap-4 mt-4 items-center">
+        <div className="flex flex-col gap-4 mt-4 items-center">
           <Input
             type="email"
             label="Email"
@@ -81,7 +89,7 @@ export const LoginModal = ({
             label="Senha"
             value={loginInput.password}
             onChange={handleInputChange}
-            validateFn={(v) => v.lenght > 8}
+            validateFn={(v) => v.length > 8}
             validationMessage="A senha deve ter no mínimo 8 caracteres"
             addonIcon={<Lock tClass="h-6 w-6" />}
             placeholder="Senha..."
@@ -90,12 +98,14 @@ export const LoginModal = ({
           />
 
           <button
-            type="submit"
+            onClick={() => {
+              mutation.mutate(loginInput);
+            }}
             className="bg-primary-700 self-center text-white rounded p-2 w-[50%] mt-2 hover:bg-primary-800 transition-colors duration-200"
           >
             Entrar
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

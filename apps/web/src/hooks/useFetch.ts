@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FetchOptions, FetchReturn, FetchingError } from "../@types/Hooks";
-import { HafApi } from "../services/api/haf_backend";
+import { HafApi } from "../api/haf_backend";
 
 function useFetch<T>({ path }: FetchOptions<T>): FetchReturn<T> {
   const [data, setData] = useState<T | null>(null);

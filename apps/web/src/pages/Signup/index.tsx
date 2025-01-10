@@ -27,7 +27,7 @@ import { Input } from "../../components/Form/Input/index";
 import { SignUpData } from "../../interfaces/SignUpData";
 import { UploadInput } from "../../components/Form";
 import { AiOutlineUpload } from "react-icons/ai";
-import { UserService } from "../../services/api/users";
+import { UserService } from "../../api/users";
 import { GoBack } from "../../components/GoBack";
 
 export const SignUpPage: React.FC = () => {

@@ -33,7 +33,7 @@ export const Input = ({
               "w-1/3": variant === "sm",
               "w-2/3": variant === "md",
               "w-full": variant === "lg",
-            }
+            },
       )}
     >
       <label htmlFor={rest.name} className="text-sm font-medium text-gray-700">
@@ -46,7 +46,7 @@ export const Input = ({
           isInvalid
             ? "border-red-500 ring-2 ring-red-500"
             : "border-gray-300 focus-within:ring-2 focus-within:ring-primary-700",
-          "shadow-sm focus-within:shadow-md"
+          "shadow-sm focus-within:shadow-md",
         )}
       >
         {/* Addon icon on the left */}
@@ -55,7 +55,9 @@ export const Input = ({
             className="px-2 flex items-center justify-center"
             aria-hidden="true"
           >
-            {React.cloneElement(addonIcon as any, { className: "w-5 h-5 text-gray-500" })}
+            {React.cloneElement(addonIcon as any, {
+              className: "w-5 h-5 text-gray-500",
+            })}
           </div>
         )}
 
@@ -72,17 +74,18 @@ export const Input = ({
             className="px-2 flex items-center justify-center"
             aria-hidden="true"
           >
-            {React.cloneElement(addonIcon as any, { className: "w-5 h-5 text-gray-500" })}
+            {React.cloneElement(addonIcon as any, {
+              className: "w-5 h-5 text-gray-500",
+            })}
           </div>
         )}
       </div>
 
       {/* Real-time validation */}
       <div
-        id={`${rest.name}-error`}
         className={clsx(
           "text-red-500 text-xs pl-2 mt-1 transition-opacity duration-300",
-          isInvalid ? "opacity-100" : "opacity-0 pointer-events-none"
+          isInvalid ? "opacity-100" : "opacity-0 pointer-events-none",
         )}
       >
         <div className="flex items-center gap-2">

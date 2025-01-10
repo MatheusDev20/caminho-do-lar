@@ -3,9 +3,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import { App } from "./App";
-import { AuthProvider } from "./context/AuthContext";
 
 import "./styles/global.css";
+import { Providers } from "./providers";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -14,9 +14,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         v7_relativeSplatPath: true,
       }}
     >
-      <AuthProvider>
+      <Providers>
         <App />
-      </AuthProvider>
+      </Providers>
     </Router>
   </React.StrictMode>,
 );

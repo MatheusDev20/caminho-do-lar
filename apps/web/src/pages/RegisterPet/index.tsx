@@ -14,7 +14,7 @@ import {
   CircularProgress,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { createPet, uploadImages } from "../../services/api/pets";
+import { createPet, uploadImages } from "../../api/pets";
 import { BsGenderAmbiguous } from "react-icons/bs";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
