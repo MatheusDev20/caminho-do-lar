@@ -47,6 +47,8 @@ export default (router: Router): void => {
     });
   });
 
+  router.get('/check-auth', checkAuth, (req: any, res) => res.status(200).json({ message: 'Authenticated' }));
+
   router.post('/avatar', checkAuth, upload.single('avatar'), adapt(factories.makeAvatarUpload()));
   router.get('/getProfile', checkAuth, adapt(factories.makeUserProfile()));
 

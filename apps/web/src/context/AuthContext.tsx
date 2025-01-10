@@ -1,98 +1,79 @@
-// /* eslint-disable @typescript-eslint/restrict-template-expressions */
-// import React, { createContext, ReactNode, useState, useContext } from "react";
-// import { LoginData, ApplicationUser } from "../interfaces";
-// import { useNavigate } from "react-router-dom";
-// import { getFromLocalStorage } from "../utils/localStorage";
-// import { AuthContextType, User } from "../@types/AuthContext";
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import React, { createContext, useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { DELETE, GET, POST } from "../libs/axios/handlers";
+import { redirect } from "react-router-dom";
 
-// interface AuthProviderProps {
-//   children: ReactNode;
-// }
+interface AuthContextProps {
+  isAuthenticated: boolean;
+  logIn: (email: string, password: string) => Promise<void>;
+  logOut: () => void;
+  checkAuth: () => Promise<void>;
+}
 
-// export const AuthContext = createContext<AuthContextType | null>(null);
+const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
-// function AuthProvider({ children }: AuthProviderProps): JSX.Element {
-//   const navigate = useNavigate();
-//   const [user, setUser] = useState<User | null>(() => {
-//     const currUser = getFromLocalStorage("currentUser", null);
-//     if (currUser) {
-//       return currUser as User;
-//     }
-//     return null;
-//   });
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-//   const [token, setToken] = useState<string | null>(() => {
-//     const token = getFromLocalStorage("token", null);
-//     if (token) {
-//       HafApi.defaults.headers.common.Authorization = `Bearer ${token}`;
-//       return token;
-//     }
+  const logIn = async (email: string, password: string): Promise<void> => {
+    try {
+      await POST({
+        authenticated: true,
+        path: "/api/login",
+        body: { username: email, password },
+        headers: { "Content-Type": "application/json" },
+      });
+      setIsAuthenticated(true);
+      redirect("/home");
+    } catch (error) {
+      console.error("Login failed:", error);
+      setIsAuthenticated(false);
+    }
+  };
 
-//     return null;
-//   });
+  // Function to log out the user
+  const logOut = async (): Promise<void> => {
+    await DELETE({
+      authenticated: true,
+      path: "/api/logout",
+    });
+    setIsAuthenticated(false);
+  };
 
-//   async function signIn({ email, password }: LoginData): Promise<void> {
-//     try {
-//       const response = await UserService.logIn({ email, password });
+  // Function to check if the user is authenticated (called on initial load)
+  const checkAuth = async (): Promise<void> => {
+    try {
+      await GET({
+        path: "/api/check-auth",
+        authenticated: true,
+      });
+      setIsAuthenticated(true);
+    } catch {
+      setIsAuthenticated(false);
+    }
+  };
 
-//       const authUser: ApplicationUser = response.data.authUser;
-//       const jwtToken: string = response.data.token;
+  // Check authentication on initial load
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
-//       localStorage.setItem(
-//         "currentUser",
-//         JSON.stringify(response.data.authUser),
-//       );
-//       localStorage.setItem("isAuth", JSON.stringify("true"));
-//       localStorage.setItem("token", JSON.stringify(jwtToken));
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, logIn, logOut, checkAuth }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
-//       HafApi.defaults.headers.common.Authorization = "Bearer " + jwtToken;
-
-//       setUser(authUser);
-//       setToken(jwtToken);
-
-//       navigate("/home");
-//     } catch (err) {
-//       // toast({
-//       //   title: 'Não foi possível realizar o Login',
-//       //   description: 'Verifique suas credenciais e tente novamente',
-//       //   status: 'error',
-//       //   duration: 5000,
-//       //   isClosable: true,
-//       //   position: 'top-right'
-//       // })
-//     }
-//   }
-
-//   function signOut(): void {
-//     try {
-//       localStorage.removeItem("currentUser");
-//       localStorage.removeItem("isAuth");
-//       localStorage.removeItem("token");
-//       window.location.reload();
-//       // toast({
-//       //   title: 'Deslogado',
-//       //   description: 'Deslogado com sucesso',
-//       //   status: 'success',
-//       //   duration: 3000,
-//       //   isClosable: true,
-//       //   position: 'top-right'
-//       // })
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
-//   return (
-//     <AuthContext.Provider value={{ signIn, user, signOut }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// }
-
-// function useAuth(): AuthContextType {
-//   const context = useContext(AuthContext);
-//   if (!context) {
-//     throw new Error("Use Context must be used within Auth provider");
-//   }
-//   return context;
-// }
-// export { AuthProvider, useAuth };
+// Hook to use the auth context
+export const useAuth = (): AuthContextProps => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};

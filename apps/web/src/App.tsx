@@ -5,7 +5,7 @@ import { AppRoutes } from "./routes/routes";
 import React from "react";
 
 export const App = (): JSX.Element => {
-  const [isLoginOpen, setIsLoginOpen] = React.useState(true);
+  const [isLoginOpen, setIsLoginOpen] = React.useState(false);
 
   return (
     <div className="min-h-screen flex flex-col">

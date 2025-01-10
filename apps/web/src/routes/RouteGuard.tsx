@@ -1,23 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 interface RouteGuardProps {
   children: React.ReactNode;
 }
 export const PrivateRoute: React.FC<RouteGuardProps> = () => {
-  let isAuth = false;
-
-  const checkAuth = (): boolean => {
-    if (localStorage.getItem("token")) {
-      isAuth = true;
-    }
-
-    return isAuth;
-  };
-
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  const { isAuthenticated } = useAuth();
   // '<Outlet />'  render the Child of element if exists
-  return isAuth ? <Outlet /> : <Navigate to="/login" />;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/home" />;
 };

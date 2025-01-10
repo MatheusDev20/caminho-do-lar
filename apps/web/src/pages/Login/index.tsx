@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import React from "react";
 import Logo from "../../../assets/79642645_SL-011023-55240-18.svg";
 import { Input } from "../../components/Form";
@@ -7,6 +8,7 @@ import { Lock } from "../../components/icons/lock";
 import { isValideEMail } from "../../utils/utils";
 import { useMutation } from "@tanstack/react-query";
 import { logIn } from "../../api/users";
+import { useAuth } from "../../context/AuthContext";
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -16,27 +18,23 @@ export const LoginModal = ({
   isOpen,
   onClose,
 }: LoginModalProps): JSX.Element | null => {
+  if (!isOpen) return null;
   const [loginInput, setLoginInput] = React.useState({
     email: "",
     password: "",
   });
 
-  if (!isOpen) return null;
+  const { logIn, logOut } = useAuth();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setLoginInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const mutation = useMutation({
-    mutationFn: async (loginData: any) => {
-      return await logIn(loginData);
-    },
-
-    onSuccess: (data) => {
-      console.log("Logou", data);
-    },
-  });
-
+  const handleLogin = async (): Promise<void> => {
+    // SANITIZE INPUT
+    await logIn(loginInput.email, loginInput.password);
+    onClose();
+  };
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-all ease-in-out delay-150"
@@ -98,9 +96,7 @@ export const LoginModal = ({
           />
 
           <button
-            onClick={() => {
-              mutation.mutate(loginInput);
-            }}
+            onClick={handleLogin}
             className="bg-primary-700 self-center text-white rounded p-2 w-[50%] mt-2 hover:bg-primary-800 transition-colors duration-200"
           >
             Entrar

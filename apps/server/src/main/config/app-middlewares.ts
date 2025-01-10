@@ -2,7 +2,7 @@
 import express, { Express } from 'express';
 import cors from 'cors';
 import pg from 'pg';
-import session, { MemoryStore } from 'express-session';
+import session from 'express-session';
 import passport from 'passport';
 import { jsonParser } from '../middlewares';
 import upload from '../../config/storage/upload';
@@ -16,8 +16,8 @@ const pgPool = new pg.Pool({
   port: Number(process.env.DB_PORT),
   database: process.env.DB_NAME,
 });
-const store = process.env.NODE_ENV === 'production' ? new PGSession({ pool: pgPool, tableName: 'session' }) : new MemoryStore();
 
+const store = new PGSession({ pool: pgPool, tableName: 'session' });
 export default (app: Express): void => {
   app.use(session({
     store,
@@ -26,7 +26,7 @@ export default (app: Express): void => {
     saveUninitialized: false,
     // cookie: { secure: false, sameSite: 'strict' }, // PRD
     cookie: {
-      sameSite: 'none', // Allow cookies across different ports
+      sameSite: 'strict', // Allow cookies across different ports
       secure: false, // No need for secure in local development
     },
   }));
