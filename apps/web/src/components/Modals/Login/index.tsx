@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React from "react";
-import Logo from "../../../assets/79642645_SL-011023-55240-18.svg";
-import { Input } from "../../components/Form";
-import { EmailIcon } from "../../components/icons/email";
+import Logo from "../../../../assets/79642645_SL-011023-55240-18.svg";
+import { useAuth } from "../../../context/AuthContext";
+import { Input } from "../../Form";
+import { Lock } from "../../icons/lock";
+import { isValideEmail } from "../../../utils/utils";
+import { EmailIcon } from "../../icons/email";
 
-import { Lock } from "../../components/icons/lock";
-import { isValideEMail } from "../../utils/utils";
-import { useMutation } from "@tanstack/react-query";
-import { logIn } from "../../api/users";
-import { useAuth } from "../../context/AuthContext";
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -78,7 +76,7 @@ export const LoginModal = ({
             onChange={handleInputChange}
             name="email"
             variant="lg"
-            validateFn={isValideEMail}
+            validateFn={isValideEmail}
             validationMessage="Email inválido"
             addonIcon={<EmailIcon tClass="h-6 w-6" />}
           />

@@ -9,7 +9,7 @@ export const isEmpty = (obj: Object): boolean => {
   return Object.keys(obj).length === 0;
 };
 
-export const isValideEMail = (email: string): boolean => {
+export const isValideEmail = (email: string): boolean => {
   if (!email) return false;
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return emailRegex.test(email);

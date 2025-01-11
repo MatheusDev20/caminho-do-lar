@@ -3,11 +3,14 @@ import Logo from "../../../assets/home/header1.png";
 import { useAuth } from "../../context/AuthContext";
 
 interface Props {
-  isLoginOpen: boolean;
+  setRegisterOpen: (isOpen: boolean) => void;
   setIsLoginOpen: (isOpen: boolean) => void;
 }
 
-export const Header = ({ isLoginOpen, setIsLoginOpen }: Props): JSX.Element => {
+export const Header = ({
+  setIsLoginOpen,
+  setRegisterOpen,
+}: Props): JSX.Element => {
   const { isAuthenticated } = useAuth();
   return (
     <header>
@@ -35,12 +38,14 @@ export const Header = ({ isLoginOpen, setIsLoginOpen }: Props): JSX.Element => {
               >
                 Entrar
               </button>
-              <a
-                href="#"
+              <button
+                onClick={() => {
+                  setRegisterOpen(true);
+                }}
                 className="text-white bg-primary-700 hover:bg-primary-800 transition ease-in-out delay-75 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none border-none"
               >
                 Cadastrar
-              </a>
+              </button>
               <button
                 data-collapse-toggle="mobile-menu-2"
                 type="button"
