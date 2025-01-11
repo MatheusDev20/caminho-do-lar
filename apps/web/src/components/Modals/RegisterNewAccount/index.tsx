@@ -38,9 +38,7 @@ export const RegisterModal = ({
       >
         {/* Side image */}
         <div
-          style={{
-            backgroundImage: `url(${Logo})`,
-          }}
+          style={{ backgroundImage: `url(${Logo})` }}
           className="bg-primary-50 min-h-full min-w-[40%] bg-cover bg-no-repeat bg-center"
         />
         {/* Form */}
