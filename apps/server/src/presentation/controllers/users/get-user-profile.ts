@@ -12,6 +12,7 @@ class GetUserProfileController implements Controller {
   }
 
   public async handle(request: Request, response: Response): Promise<Response> {
+    console.log('request.user', request.user);
     const userProfile = await this.useCase.getProfile(request.user.id);
     return response.json(userProfile);
   }

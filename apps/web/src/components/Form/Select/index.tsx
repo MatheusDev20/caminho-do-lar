@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import clsx from "clsx";
 import { ChevronUpIcon } from "../../../components/icons/chevron-up.icon";
 import { ChevronDownIcon } from "../../../components/icons/chevron.icon";
 import React from "react";
@@ -8,15 +9,21 @@ interface Options {
   name: string;
 }
 interface Props {
+  variant?: "sm" | "md" | "lg";
+  custom?: string;
   options: Options[];
   placeholder: string;
   label: string;
   value: any;
   onChange: (selected: Options) => void;
+  optionBg?: string;
 }
 
 export const Select = ({
   options,
+  optionBg,
+  custom,
+  variant,
   placeholder,
   label,
   value,
@@ -25,14 +32,27 @@ export const Select = ({
   const [openDropDown, setOpenDropDown] = React.useState(false);
 
   return (
-    <div className="flex flex-col mt-5 items-center">
+    <div
+      className={clsx(
+        "flex flex-col items-center",
+        custom
+          ? `w-[${custom}]`
+          : {
+              "w-1/3": variant === "sm",
+              "w-2/3": variant === "md",
+              "w-full": variant === "lg",
+            },
+      )}
+    >
       <div className="w-full flex flex-col items-center">
         <div className="w-full">
           <div className="flex flex-col items-center relative">
             <div className="w-full">
-              <label className="block text-md text-gray-600">{label}</label>
+              <label className="text-sm font-medium text-gray-700">
+                {label}
+              </label>
               <div
-                className="my-2 p-1 bg-white flex border border-gray-200 rounded cursor-pointer"
+                className="my-2 p-2 rounded-lg bg-white border-gray-300 flex border cursor-pointer"
                 onClick={() => {
                   setOpenDropDown(!openDropDown);
                 }}
@@ -40,7 +60,7 @@ export const Select = ({
                 <input
                   value={value ?? ""}
                   placeholder={placeholder}
-                  className="p-1 px-2 appearance-none outline-none w-full text-gray-800 cursor-pointer"
+                  className="p-2 px-2 appearance-none outline-none w-full text-gray-800 cursor-pointer"
                   readOnly
                 />
                 <div className="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 hover:bg-slate-50">
@@ -65,7 +85,9 @@ export const Select = ({
                       <div className="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
                         <div className="w-6 flex flex-col items-center">
                           {option.imgLink && (
-                            <div className="flex relative bg-orange-500 justify-center items-center m-1 mr-2 w-6 h-6 rounded-full">
+                            <div
+                              className={`flex relative ${optionBg ?? "bg-orange-500"}  justify-center items-center m-1 mr-2 w-6 h-6 rounded-full`}
+                            >
                               <img
                                 className="rounded-full"
                                 alt={option.name}

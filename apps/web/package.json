@@ -8,7 +8,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.63.0",
     "axios": "^1.7.9",
+    "clsx": "^2.1.1",
     "date-fns": "^2.29.3",
     "framer-motion": "^6.4.3",
     "i": "^0.3.7",

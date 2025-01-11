@@ -13,11 +13,12 @@ class AuthController implements Controller {
 
   public async handle(request: Request, response: Response): Promise<Response> {
     const errors = validationResult(request);
+
     if (!errors.isEmpty()) throw new InvalidParamError(errors);
 
     const { email, password } = request.body;
 
-    const { token, expiration, authUser } = await this.useCase.auth(
+    const { authUser } = await this.useCase.auth(
       {
         authInfo: {
           email,
@@ -25,10 +26,8 @@ class AuthController implements Controller {
         },
       },
     );
-    console.log(token);
-    return response.json({
-      token, expiration, authUser,
-    });
+
+    return response.json({ authUser });
   }
 }
 

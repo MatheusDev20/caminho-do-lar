@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import multer from 'multer';
 import { body, query, param } from 'express-validator';
-import authMiddleware from '../../middlewares/authorization';
 import uploadConfig from '../../config/storage/upload';
 import routeAdapter from './adapters/route-adapter';
 import {
@@ -26,11 +25,10 @@ export default (router: Router): void => {
     body('city').notEmpty(),
     body('uf').notEmpty(),
     body('specie').notEmpty(),
-    authMiddleware,
     routeAdapter(makeCreatePetController()),
   );
 
-  router.post('/pet/upload', authMiddleware, upload.array('photos', 4), routeAdapter(makeUploadPetPhotosController()));
+  router.post('/pet/upload', upload.array('photos', 4), routeAdapter(makeUploadPetPhotosController()));
 
   // router.get('/pet', adapter(makeListUserPetsController()));
 

@@ -15,8 +15,8 @@ interface Request {
 }
 interface Response {
   authUser: AuthenticatedUser
-  token?: string
-  expiration: string;
+  // token?: string
+  // expiration: string;
 }
 class AuthorizationUseCase {
   private readonly repository: IUsersRepository;
@@ -37,13 +37,11 @@ class AuthorizationUseCase {
 
     const passwordMatch = await compare(authInfo.userPassword, user.password);
 
-    if (!passwordMatch) {
-      throw new AppError('Wrong password');
-    }
+    if (!passwordMatch) throw new AppError('Wrong password');
 
     const { secret, expiresIn } = authConfig;
-    console.log('Secret on Use case', secret);
-    const token = await this.generateToken.generate({ expiresIn, secret, sub: user.id });
+
+    // const token = await this.generateToken.generate({ expiresIn, secret, sub: user.id });
     // const token = sign({}, secret, {
     //   subject: user.id,
     //   expiresIn,
@@ -52,9 +50,11 @@ class AuthorizationUseCase {
       password, created_at, updated_at, ...authUser
     } = user;
 
-    return {
-      authUser, token, expiration: expiresIn,
-    };
+    return { authUser };
+
+    // return {
+    //   authUser, token, expiration: expiresIn,
+    // };
   }
 }
 export default AuthorizationUseCase;
