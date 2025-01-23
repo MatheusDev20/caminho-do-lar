@@ -1,3 +1,5 @@
+/* eslint-disable no-unreachable */
+import { RegisterNewUser } from "../@types";
 import { LoginData } from "../interfaces";
 import { POST } from "../libs/axios/handlers";
 
@@ -6,6 +8,18 @@ export const logIn = async (authData: LoginData): Promise<any> => {
     authenticated: true,
     path: "/api/login",
     body: { username: authData.email, password: authData.password },
+    headers: { "Content-Type": "application/json" },
+  });
+
+  const { body } = res;
+  return body;
+};
+
+export const registerUser = async (data: RegisterNewUser): Promise<any> => {
+  const res = await POST({
+    authenticated: false,
+    path: "/api/signup",
+    body: data,
     headers: { "Content-Type": "application/json" },
   });
 

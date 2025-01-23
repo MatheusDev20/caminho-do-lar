@@ -14,3 +14,10 @@ export type RequestState = {
   loading: boolean;
   error: string;
 };
+
+export type RegisterNewUser = {
+  name: string;
+  email: string;
+  password: string;
+  petPreference: "Cachorros" | "Gatos" | null;
+};

@@ -20,7 +20,11 @@ export const App = (): JSX.Element => {
       <Header setRegisterOpen={openRegister} setIsLoginOpen={openLogin} />
       <div className="flex-grow">
         <LoginModal isOpen={isLoginOpen} onClose={closeLogin} />
-        <RegisterModal isOpen={isRegisterOpen} onClose={closeRegister} />
+        <RegisterModal
+          isOpen={isRegisterOpen}
+          onClose={closeRegister}
+          openLoginModal={openLogin}
+        />
         <AppRoutes />
       </div>
       <Footer />
