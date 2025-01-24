@@ -8,6 +8,8 @@ import { isValideEmail } from "../../../utils/utils";
 import { EmailIcon } from "../../icons/email";
 import clsx from "clsx";
 import { Transition } from "@headlessui/react";
+import { useLogin } from "../../../hooks/tanstack/login.mutations";
+import { FeedbackBox } from "../../error-box";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -24,30 +26,39 @@ export const LoginModal = ({
     password: "",
   });
 
-  const { logIn, logOut } = useAuth();
+  const { execute, loginError, loginLoading, loginSuccess, reset } = useLogin({
+    data: loginInput,
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setLoginInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleLogin = async (): Promise<void> => {
-    await logIn(loginInput.email, loginInput.password);
-    onClose();
+    execute();
   };
 
   return (
-    <Transition show={isOpen} appear={true}>
-      <div
-        className={clsx(
-          "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-all duration-300",
-          "data-[closed]:opacity-0",
-          "data-[enter]:duration-500 data-[enter]:data-[closed]:translate-y-full",
-          "data-[leave]:duration-300 data-[leave]:data-[closed]:translate-y-full",
-        )}
-        onClick={onClose}
+    <div
+      className={clsx(
+        "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-all duration-300",
+      )}
+      onClick={onClose}
+    >
+      <Transition
+        enter="transition ease-in duration-200"
+        enterFrom="opacity-0 debug translate-y-0"
+        enterTo="opacity-100"
+        leave="transition ease-in duration-200"
+        leaveFrom="opacity-100 translate-y-0"
+        leaveTo="opacity-0 translate-y-full"
+        show={true}
+        appear={true}
       >
         <div
-          className="bg-white rounded-lg relative p-8 w-[90%] min-w-[300px] max-w-md 2xl:max-w-lg shadow-xl"
+          className={clsx(
+            "bg-white rounded-lg relative p-8 w-[90%] min-w-[300px] max-w-md 2xl:max-w-lg shadow-xl",
+          )}
           onClick={(e) => {
             e.stopPropagation();
           }}
@@ -73,6 +84,14 @@ export const LoginModal = ({
           <div className="w-full flex items-center justify-center gap-4 p-2 mt-8">
             <h2 className="text-2xl text-primary-700">Bem vindo de volta</h2>
           </div>
+
+          {true && (
+            <FeedbackBox
+              type="error"
+              text="Erro ao fazer login"
+              onClose={reset}
+            />
+          )}
 
           {/* Form */}
           <div className="flex flex-col gap-4 mt-4 items-center">
@@ -109,7 +128,7 @@ export const LoginModal = ({
             </button>
           </div>
         </div>
-      </div>
-    </Transition>
+      </Transition>
+    </div>
   );
 };

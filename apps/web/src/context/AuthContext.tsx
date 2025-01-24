@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { createContext, useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { DELETE, GET, POST } from "../libs/axios/handlers";
 import { redirect } from "react-router-dom";
 
 interface AuthContextProps {
   isAuthenticated: boolean;
-  logIn: (email: string, password: string) => Promise<void>;
+  logIn: (data: { email: string; password: string }) => Promise<void>;
   logOut: () => void;
   checkAuth: () => Promise<void>;
 }
@@ -19,12 +18,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const logIn = async (email: string, password: string): Promise<void> => {
+  const logIn = async (data: {
+    email: string;
+    password: string;
+  }): Promise<void> => {
     try {
       await POST({
         authenticated: true,
         path: "/api/login",
-        body: { username: email, password },
+        body: { username: data.email, password: data.password },
         headers: { "Content-Type": "application/json" },
       });
       setIsAuthenticated(true);

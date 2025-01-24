@@ -84,27 +84,32 @@ export const RegisterModal = ({
       modalRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, [registerSuccess]);
-
   /* JSX */
   if (!isOpen) return null;
   return (
     <div
       className={clsx(
-        "fixed inset-0 bg-black bg-opacity-50 flex gap-3 items-center justify-center z-50 transition-all duration-300",
+        "fixed inset-0 bg-black bg-opacity-50 flex gap-3 items-center justify-center z-50",
       )}
       onClick={closeModal}
     >
-      <Transition show={isOpen} appear={true}>
+      <Transition
+        enter="transition ease-in duration-200"
+        enterFrom="opacity-0 debug translate-y-0"
+        enterTo="opacity-100"
+        leave="transition ease-in duration-200"
+        leaveFrom="opacity-100 translate-y-0"
+        leaveTo="opacity-0 translate-y-full"
+        show={isOpen}
+        appear={true}
+      >
         <div
           className={clsx(
             "bg-white rounded-lg relative min-w-[50%] 2xl:overflow-y-hidden md:max-h-[80vh] max-h-screen overflow-y-auto flex max-w-md 2xl:max-w-lg shadow-xl transition-all duration-300",
-            "data-[closed]:opacity-0",
-            "data-[enter]:duration-500 data-[enter]:data-[closed]:translate-y-full",
-            "data-[leave]:duration-300 data-[leave]:data-[closed]:translate-y-full",
           )}
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
+          // onClick={(e) => {
+          //   e.stopPropagation();
+          // }}
         >
           {/* Side image */}
           <div
