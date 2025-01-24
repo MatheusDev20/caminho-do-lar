@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React from "react";
 import Logo from "../../../../assets/79642645_SL-011023-55240-18.svg";
-import { useAuth } from "../../../context/AuthContext";
 import { Input } from "../../Form";
 import { Lock } from "../../icons/lock";
 import { isValideEmail } from "../../../utils/utils";
@@ -10,6 +9,7 @@ import clsx from "clsx";
 import { Transition } from "@headlessui/react";
 import { useLogin } from "../../../hooks/tanstack/login.mutations";
 import { FeedbackBox } from "../../error-box";
+import { Spinner } from "../../spinner";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -36,6 +36,10 @@ export const LoginModal = ({
 
   const handleLogin = async (): Promise<void> => {
     execute();
+  };
+
+  const redirect = (): void => {
+    onClose();
   };
 
   return (
@@ -85,10 +89,19 @@ export const LoginModal = ({
             <h2 className="text-2xl text-primary-700">Bem vindo de volta</h2>
           </div>
 
-          {true && (
+          {loginSuccess && (
+            <FeedbackBox
+              type="success"
+              text="Voce será redirecionado em instantes"
+              redirectTo={{ time: 5000, fn: redirect }}
+              onClose={reset}
+            />
+          )}
+
+          {loginError && (
             <FeedbackBox
               type="error"
-              text="Erro ao fazer login"
+              text="Erro ao realizar login, verifique suas credenciais e tente novamente"
               onClose={reset}
             />
           )}
@@ -122,10 +135,24 @@ export const LoginModal = ({
 
             <button
               onClick={handleLogin}
+              disabled={
+                loginLoading || Object.values(loginInput).some((v) => !v)
+              }
+              className="bg-primary-700 rounded-lg min-w-[50%] cursor-pointer self-center justify-center text-white p-3  mt-2 hover:bg-primary-800 transition-colors duration-200"
+            >
+              {loginLoading ? (
+                <Spinner size="sm" text="Aguarde" />
+              ) : (
+                <span className="text-sm">Entrar</span>
+              )}
+            </button>
+
+            {/* <button
+              onClick={handleLogin}
               className="bg-primary-700 self-center text-white rounded p-2 w-[50%] mt-2 hover:bg-primary-800 transition-colors duration-200"
             >
               Entrar
-            </button>
+            </button> */}
           </div>
         </div>
       </Transition>
