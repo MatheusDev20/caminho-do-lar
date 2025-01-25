@@ -1,14 +1,18 @@
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { DELETE, GET, POST } from "../libs/axios/handlers";
-import { redirect } from "react-router-dom";
+import { timeout } from "../utils/utils";
+import { AuthResponse } from "../@types";
 
 interface AuthContextProps {
   isAuthenticated: boolean;
   logIn: (data: { email: string; password: string }) => Promise<void>;
   logOut: () => void;
   checkAuth: () => Promise<void>;
+  user: any;
+  loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -17,12 +21,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<any | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const logIn = async (data: {
     email: string;
     password: string;
   }): Promise<void> => {
     try {
+      await timeout(2000);
       await POST({
         authenticated: true,
         path: "/api/login",
@@ -30,7 +37,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         headers: { "Content-Type": "application/json" },
       });
       setIsAuthenticated(true);
-      redirect("/home");
     } catch (error) {
       console.error("Login failed:", error);
       setIsAuthenticated(false);
@@ -46,26 +52,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setIsAuthenticated(false);
   };
 
-  // Function to check if the user is authenticated (called on initial load)
   const checkAuth = async (): Promise<void> => {
     try {
-      await GET({
+      setLoading(true);
+      const { body } = await GET<AuthResponse>({
         path: "/api/check-auth",
         authenticated: true,
       });
       setIsAuthenticated(true);
-    } catch {
+      setUser(body.user);
+    } catch (err) {
       setIsAuthenticated(false);
+      setUser(null);
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Check authentication on initial load
   useEffect(() => {
     checkAuth();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, logIn, logOut, checkAuth }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, logIn, logOut, checkAuth, user, loading }}
+    >
       {children}
     </AuthContext.Provider>
   );

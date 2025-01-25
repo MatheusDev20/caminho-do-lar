@@ -15,7 +15,7 @@ export const GET = async <T>(
     });
 
     const retrieveData: BasicResponse<T> = {
-      body: response.data.body,
+      body: response.data,
     };
 
     return retrieveData;

@@ -21,3 +21,8 @@ export type RegisterNewUser = {
   password: string;
   petPreference: "Cachorros" | "Gatos" | null;
 };
+
+export type AuthResponse = {
+  message: string;
+  user: any;
+};

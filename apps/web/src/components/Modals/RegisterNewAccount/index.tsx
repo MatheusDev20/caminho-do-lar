@@ -84,6 +84,7 @@ export const RegisterModal = ({
       modalRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, [registerSuccess]);
+
   /* JSX */
   if (!isOpen) return null;
   return (
@@ -107,9 +108,9 @@ export const RegisterModal = ({
           className={clsx(
             "bg-white rounded-lg relative min-w-[50%] 2xl:overflow-y-hidden md:max-h-[80vh] max-h-screen overflow-y-auto flex max-w-md 2xl:max-w-lg shadow-xl transition-all duration-300",
           )}
-          // onClick={(e) => {
-          //   e.stopPropagation();
-          // }}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
         >
           {/* Side image */}
           <div

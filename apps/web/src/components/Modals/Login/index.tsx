@@ -39,6 +39,7 @@ export const LoginModal = ({
   };
 
   const redirect = (): void => {
+    reset();
     onClose();
   };
 
@@ -132,27 +133,21 @@ export const LoginModal = ({
               name="password"
               variant="lg"
             />
-
-            <button
-              onClick={handleLogin}
-              disabled={
-                loginLoading || Object.values(loginInput).some((v) => !v)
-              }
-              className="bg-primary-700 rounded-lg min-w-[50%] cursor-pointer self-center justify-center text-white p-3  mt-2 hover:bg-primary-800 transition-colors duration-200"
-            >
-              {loginLoading ? (
-                <Spinner size="sm" text="Aguarde" />
-              ) : (
-                <span className="text-sm">Entrar</span>
-              )}
-            </button>
-
-            {/* <button
-              onClick={handleLogin}
-              className="bg-primary-700 self-center text-white rounded p-2 w-[50%] mt-2 hover:bg-primary-800 transition-colors duration-200"
-            >
-              Entrar
-            </button> */}
+            {!loginSuccess && (
+              <button
+                onClick={handleLogin}
+                disabled={
+                  loginLoading || Object.values(loginInput).some((v) => !v)
+                }
+                className="bg-primary-700 rounded-lg min-w-[50%] cursor-pointer self-center justify-center text-white p-3  mt-2 hover:bg-primary-800 transition-colors duration-200"
+              >
+                {loginLoading ? (
+                  <Spinner size="sm" text="Aguarde" />
+                ) : (
+                  <span className="text-sm">Entrar</span>
+                )}
+              </button>
+            )}
           </div>
         </div>
       </Transition>

@@ -19,6 +19,7 @@ import UserRepository from '../../infra/db/postgres/repositories/user-repository
 import CreateUserUseCase from '../../data/users/usecases/add-user-usecase';
 import GetUserProfileController from '../../presentation/controllers/users/get-user-profile';
 import GetUserProfileUseCase from '../../data/users/usecases/get-user-profile';
+import CheckAuthController from '../../presentation/controllers/users/check-auth-controller';
 
 const makeSignUpUserController = (): Controller => {
   const userRepository = new UserRepository();
@@ -88,6 +89,14 @@ const makeResetPasswordController = (): Controller => {
   return resetPasswordController;
 };
 
+const makeCheckAuthController = (): Controller => {
+  const usersRepository = new UserRepository();
+  const getProfileUseCase = new GetUserProfileUseCase(usersRepository);
+  const checkAuthController = new CheckAuthController(getProfileUseCase);
+
+  return checkAuthController;
+};
+
 export {
   makeSignUpUserController,
   makeDeleteUserController,
@@ -96,4 +105,5 @@ export {
   makeUserProfile,
   makeForgotPasswordController,
   makeResetPasswordController,
+  makeCheckAuthController,
 };

@@ -4,18 +4,17 @@ import { Filter } from "../../components/Filter/index";
 import { useFilters } from "../../hooks/useFilters";
 import { HighlightSection } from "./components/HighlightSection";
 import { PetCard } from "../../components/PetCard";
+import { useAuth } from "../../context/AuthContext";
 
 export const Home: React.FC = () => {
   const { filters, change, clear } = useFilters();
-
+  const { isAuthenticated, user } = useAuth();
   const hasAnyFilter = Object.values(filters).some(
     (filter) => filter !== "Todos",
   );
-
   const filtersAppliedLength = Object.values(filters).filter(
     (v) => v !== "Todos",
   ).length;
-
   return (
     <main className="flex flex-col md:p-12 gap-12">
       <HighlightSection />
