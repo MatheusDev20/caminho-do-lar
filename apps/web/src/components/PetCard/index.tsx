@@ -1,8 +1,9 @@
 import React from "react";
 import { Heart } from "../icons/heart.icon";
+import { Pet } from "../../interfaces/pet";
 
 interface Props {
-  petInformation: any;
+  petInformation: Pet;
 }
 
 export const PetCard = ({ petInformation }: Props): JSX.Element => {

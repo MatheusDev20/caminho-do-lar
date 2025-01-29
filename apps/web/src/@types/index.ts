@@ -26,3 +26,14 @@ export type AuthResponse = {
   message: string;
   user: any;
 };
+
+export type PetPageParams = {
+  filters: {
+    gender: string;
+    specie: string;
+    size: string;
+  };
+  page: string;
+};
+
+export type Pet = any;

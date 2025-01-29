@@ -1,29 +1,21 @@
 import { Pet } from "../interfaces/pet";
 
-import { Filters, RegisterPetData } from "../interfaces";
+import { RegisterPetData } from "../interfaces";
 import { HafApi } from "./haf_backend";
+import { PetPageParams } from "../@types";
+import { convertQueryParams, GET } from "../libs/axios/handlers";
+import { timeout } from "../utils/utils";
 
-export const getPetPage = async (page: string): Promise<Pet[]> => {
-  try {
-    const response = await HafApi.get(`/api/pet/list?page=${page}`);
-    return response.data;
-  } catch (err) {
-    throw new Error("Error searching pet page");
-  }
-};
+export const getPetsList = async (data: PetPageParams): Promise<Pet[]> => {
+  const currentPage = data.page;
+  const fullPath = convertQueryParams("/api/pet/list/", {
+    ...data.filters,
+    page: currentPage,
+  });
+  await timeout(10000);
+  const res = await GET<Pet[]>({ authenticated: false, path: fullPath });
 
-export const getPageWithFilters = async (
-  page: string,
-  filters: Filters,
-): Promise<Pet[]> => {
-  try {
-    const recoveryPage = await HafApi.get(
-      `/api/pet/list?page=${page}&gender=${filters.gender}&size=${filters.size}&specie=${filters.specie}`,
-    );
-    return recoveryPage.data;
-  } catch (err) {
-    throw new Error("Error searching pet with filters");
-  }
+  return res.body;
 };
 
 export const uploadImages = async (

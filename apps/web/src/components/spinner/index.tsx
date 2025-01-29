@@ -3,9 +3,11 @@ import React from "react";
 type Props = {
   text: string;
   size: "sm" | "md" | "lg";
+  textClass?: string;
 };
 
-export const Spinner = ({ text, size }: Props): JSX.Element => {
+export const Spinner = ({ text, size, textClass }: Props): JSX.Element => {
+  const defaultText = "text-sm text-nowrap";
   const getSize = (size: string): string => {
     switch (size) {
       case "sm":
@@ -21,7 +23,7 @@ export const Spinner = ({ text, size }: Props): JSX.Element => {
 
   return (
     <div role="status" className="items-center flex gap-4 px-2 justify-center">
-      <span className="text-sm text-nowrap">{text}</span>
+      <span className={textClass ?? defaultText}>{text}</span>
       <svg
         aria-hidden="true"
         className={`${getSize(size)} text-gray-200 animate-spin dark:text-gray-600 fill-blue-600`}
