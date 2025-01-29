@@ -18,7 +18,7 @@ import { FaTimes } from "react-icons/fa";
 
 interface RegisterModalProps {
   isOpen: boolean;
-  onClose: () => void;
+  onClose: (type: "login" | "register") => void;
   openLoginModal: () => void;
 }
 
@@ -71,7 +71,7 @@ export const RegisterModal = ({
       petPreference: null,
     });
 
-    onClose();
+    onClose("register");
   };
 
   const redirectToLogin = (): void => {
@@ -96,7 +96,7 @@ export const RegisterModal = ({
     >
       <Transition
         enter="transition ease-in duration-200"
-        enterFrom="opacity-0 debug translate-y-0"
+        enterFrom="opacity-0 translate-y-0"
         enterTo="opacity-100"
         leave="transition ease-in duration-200"
         leaveFrom="opacity-100 translate-y-0"
@@ -106,7 +106,7 @@ export const RegisterModal = ({
       >
         <div
           className={clsx(
-            "bg-white rounded-lg relative min-w-[50%] 2xl:overflow-y-hidden md:max-h-[80vh] max-h-screen overflow-y-auto flex max-w-md 2xl:max-w-lg shadow-xl transition-all duration-300",
+            "bg-white rounded-lg relative min-w-[50%] 2xl:overflow-y-hidden md:max-h-[90vh] flex max-w-md 2xl:max-w-lg shadow-xl transition-all duration-300",
           )}
           onClick={(e) => {
             e.stopPropagation();
@@ -115,7 +115,7 @@ export const RegisterModal = ({
           {/* Side image */}
           <div
             style={{ backgroundImage: `url(${Logo})` }}
-            className="bg-primary-50  min-h-screen min-w-[40%] bg-cover bg-no-repeat bg-center"
+            className="bg-primary-50 min-h-full min-w-[40%] bg-cover bg-no-repeat bg-center"
           />
           {/* Form */}
           <div className="flex-1 flex flex-col md:p-8">
@@ -196,7 +196,7 @@ export const RegisterModal = ({
                 disabled={
                   registerLoading || Object.values(registerData).some((v) => !v)
                 }
-                className="bg-primary-700 rounded-lg min-w-[50%] cursor-pointer self-center justify-center text-white p-3  mt-2 hover:bg-primary-800 transition-colors duration-200"
+                className="bg-primary-700 rounded-lg min-w-[50%] cursor-pointer self-center justify-center text-white p-3 mt-4 hover:bg-primary-800 transition-colors duration-200"
               >
                 {registerLoading ? (
                   <Spinner size="sm" text="Aguarde" />

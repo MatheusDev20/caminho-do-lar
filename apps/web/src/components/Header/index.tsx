@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "../../../assets/home/header1.png";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/auth";
 
 interface Props {
   setRegisterOpen: (isOpen: boolean) => void;

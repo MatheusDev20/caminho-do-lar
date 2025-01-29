@@ -52,7 +52,7 @@ export const LoginModal = ({
     >
       <Transition
         enter="transition ease-in duration-200"
-        enterFrom="opacity-0 debug translate-y-0"
+        enterFrom="opacity-0 translate-y-0"
         enterTo="opacity-100"
         leave="transition ease-in duration-200"
         leaveFrom="opacity-100 translate-y-0"

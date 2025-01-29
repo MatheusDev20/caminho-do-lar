@@ -4,13 +4,11 @@ import { Filter } from "../../components/Filter/index";
 import { useFilters } from "../../hooks/useFilters";
 import { HighlightSection } from "./components/HighlightSection";
 import { PetCard } from "../../components/PetCard";
-import { useAuth } from "../../context/AuthContext";
 import { useHomeList } from "../../hooks/tanstack/pet-list.query";
 import { Spinner } from "../../components/spinner";
 import NotFoundDog from "../../../assets/home/not-found-dog.png";
 
 export const Home: React.FC = () => {
-  const { isAuthenticated, user } = useAuth();
   const { filters, change, clear, pageOptions } = useFilters();
   const { petList, isLoading } = useHomeList({ filters, page: "1" });
 
