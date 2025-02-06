@@ -13,7 +13,6 @@ class AuthController implements Controller {
 
   public async handle(request: Request, response: Response): Promise<Response> {
     const errors = validationResult(request);
-
     if (!errors.isEmpty()) throw new InvalidParamError(errors);
 
     const { email, password } = request.body;

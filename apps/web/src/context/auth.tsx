@@ -3,8 +3,8 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { DELETE, GET, POST } from "../libs/axios/handlers";
-import { timeout } from "../utils/utils";
 import { AuthResponse } from "../@types";
+import { timeout } from "../utils/utils";
 
 interface AuthContextProps {
   isAuthenticated: boolean;
@@ -29,21 +29,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     password: string;
   }): Promise<void> => {
     try {
-      await timeout(2000);
-      await POST({
+      await timeout(1500);
+      const { body } = await POST<AuthResponse>({
         authenticated: true,
         path: "/api/login",
         body: { username: data.email, password: data.password },
         headers: { "Content-Type": "application/json" },
       });
       setIsAuthenticated(true);
+      setUser(body.user);
     } catch (error) {
       console.error("Login failed:", error);
       setIsAuthenticated(false);
     }
   };
 
-  // Function to log out the user
   const logOut = async (): Promise<void> => {
     await DELETE({
       authenticated: true,

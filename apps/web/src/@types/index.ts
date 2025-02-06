@@ -1,3 +1,12 @@
+type User = {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  petPreference: string;
+  admin: boolean;
+};
+
 export type BasicRequest = {
   path: string;
   authenticated: boolean;
@@ -24,7 +33,7 @@ export type RegisterNewUser = {
 
 export type AuthResponse = {
   message: string;
-  user: any;
+  user: User;
 };
 
 export type PetPageParams = {

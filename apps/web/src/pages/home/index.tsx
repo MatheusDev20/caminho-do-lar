@@ -67,22 +67,24 @@ export const Home: React.FC = () => {
         {/* Filters: Refine your search */}
         <div className="flex flex-col md:basis-1/3 md:max-h-[80vh] overflow-y-auto shadow-md rounded-lg p-4 w-full">
           <header className="p-2 flex items-center justify-between gap-4">
-            <h2 className="text-sm md:text-xl font-semibold">
-              Refine sua busca
-            </h2>
-            {/* Filtros */}
-            {hasAnyFilter && (
-              <p
-                onClick={clear}
-                className="bg-gray-100 cursor-pointer rounded-xl px-4 py-2 text-primary-700 text-sm"
-              >
-                Limpar{" "}
-                <span className="text-primary-700 font-semibold">
-                  {filtersAppliedLength}
-                </span>{" "}
-                Filtros
-              </p>
-            )}
+            <div className="flex flex-col self-center m-auto gap-2">
+              <h2 className="text-sm md:text-xl font-semibold">
+                Refine sua busca
+              </h2>
+              {/* Filtros */}
+              {hasAnyFilter && (
+                <p
+                  onClick={clear}
+                  className="bg-gray-100 cursor-pointer rounded-xl px-4 py-2 text-primary-700 text-sm"
+                >
+                  Limpar{" "}
+                  <span className="text-primary-700 font-semibold">
+                    {filtersAppliedLength}
+                  </span>{" "}
+                  Filtros
+                </p>
+              )}
+            </div>
 
             <FunnelIcon tClass="h-6 w-6 text-primary-700" />
           </header>

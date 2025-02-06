@@ -36,8 +36,9 @@ export const POST = async <T>(
 
     withCredentials: authenticated,
   });
+
   const { data } = response;
-  return data;
+  return { body: data };
 };
 
 export const PATCH = async <T>(

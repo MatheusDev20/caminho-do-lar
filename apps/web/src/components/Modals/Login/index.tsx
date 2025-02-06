@@ -10,6 +10,7 @@ import { Transition } from "@headlessui/react";
 import { useLogin } from "../../../hooks/tanstack/login.mutations";
 import { FeedbackBox } from "../../error-box";
 import { Spinner } from "../../spinner";
+import { FaTimes } from "react-icons/fa";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -72,8 +73,9 @@ export const LoginModal = ({
             className="text-[24px] absolute right-0 mr-8 text-primary-500 hover:text-primary-700 transition-colors"
             onClick={onClose}
           >
-            x
+            <FaTimes className="text-[16px]" />
           </button>
+
           {/* Circular image with highlight */}
           <div className="rounded-full shadow-2xl bg-gradient-to-r from-primary-200 to-primary-500 p-[3px] absolute h-[80px] w-[80px] right-[50%] translate-x-[50%] top-[-40px] flex items-center justify-center">
             <div className="rounded-full bg-white h-full w-full flex items-center justify-center">
