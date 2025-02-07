@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { compare } from 'bcryptjs';
-import { sign } from 'jsonwebtoken';
 import { AuthenticatedUser } from '../../domain/user/dtos/AuthenticatedUser';
 import { Criptography } from '../protocols/criptography';
 import AppError from '../../presentation/errors/AppError';
-import authConfig from '../../config/auth/login-token';
 import IUsersRepository from '../protocols/repositorys/user-repository';
 
 interface Request {
@@ -39,13 +37,6 @@ class AuthorizationUseCase {
 
     if (!passwordMatch) throw new AppError('Wrong password');
 
-    const { secret, expiresIn } = authConfig;
-
-    // const token = await this.generateToken.generate({ expiresIn, secret, sub: user.id });
-    // const token = sign({}, secret, {
-    //   subject: user.id,
-    //   expiresIn,
-    // });
     const {
       password, created_at, updated_at, ...authUser
     } = user;

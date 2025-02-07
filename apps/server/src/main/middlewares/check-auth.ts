@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable consistent-return */
 import { NextFunction } from 'express';
 import passport from 'passport';
@@ -22,7 +23,10 @@ export const logIn = (req: any, res: any, next: NextFunction) => {
       if (loginErr) {
         return res.status(500).json({ message: 'Login failed' });
       }
-      return res.status(200).json({ message: 'Logged in successfully', id: user.id });
+      const {
+        password, created_at, updated_at, ...authUser
+      } = user;
+      return res.status(200).json({ message: 'Logged in successfully', user: authUser });
     });
   })(req, res, next);
 };

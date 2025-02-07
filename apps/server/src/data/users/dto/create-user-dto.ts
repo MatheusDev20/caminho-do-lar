@@ -5,6 +5,7 @@ interface CreateUserDTO {
   password: string;
   petPreference: string;
   admin: boolean;
+  avatar: string;
 }
 
 export default CreateUserDTO;

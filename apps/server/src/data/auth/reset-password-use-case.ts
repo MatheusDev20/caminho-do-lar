@@ -1,10 +1,10 @@
 import { hash } from 'bcryptjs';
-import { IForgotTokenRepository } from 'data/protocols';
 import IUsersRepository from '../protocols/repositorys/user-repository';
 import forgotPassConfig from '../../config/auth/forgot-pass';
 import { Criptography } from '../protocols/criptography';
 import AppError from '../../presentation/errors/AppError';
 import { ResetPassword } from '../../domain/auth/useCases/reset-password-use-case';
+import { IForgotTokenRepository } from '../protocols';
 
 export class ResetPasswordUseCase implements ResetPassword {
   private readonly verifyToken: Criptography;

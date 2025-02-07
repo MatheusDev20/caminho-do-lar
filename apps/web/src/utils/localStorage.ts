@@ -1,17 +1,16 @@
-
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-export function setOnLocalStorage (key: string, value: string): void {
+export function setOnLocalStorage(key: string, value: string): void {
   try {
-    localStorage.setItem(key, JSON.stringify(value))
+    localStorage.setItem(key, JSON.stringify(value));
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 }
 
-export function getFromLocalStorage (key: string, initialState: any): any {
+export function getFromLocalStorage(key: string, initialState: any): any {
   try {
-    const value = localStorage.getItem(key)
-    const user = value ? JSON.parse(value) : initialState
+    const value = localStorage.getItem(key);
+    const user = value ? JSON.parse(value) : initialState;
 
     if (user) {
       return {
@@ -20,10 +19,10 @@ export function getFromLocalStorage (key: string, initialState: any): any {
         email: user.email,
         avatar: user.avatar,
         petPreference: user.petPreference,
-        admin: user.admin
-      }
+        admin: user.admin,
+      };
     }
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 }

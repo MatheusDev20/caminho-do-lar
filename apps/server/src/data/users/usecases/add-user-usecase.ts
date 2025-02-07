@@ -17,11 +17,10 @@ class CreateUserUseCase implements CreateNewUser {
   public async create(userData: CreateUserDTO): Promise<CreatedUserDTO> {
     const existedEmail = await this.repository.findByEmail(userData.email);
 
-    if (existedEmail) {
-      throw new AppError('Email already Taken', 400);
-    }
+    if (existedEmail) { throw new AppError('Email already Taken', 400); }
 
     userData.password = await hash(userData.password, 8);
+    userData.avatar = `${process.env.STORAGE_URL}/general/default_avatar.jpg`;
 
     const createdUser = this.repository.create(userData);
     return createdUser;

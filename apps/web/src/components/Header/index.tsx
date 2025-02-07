@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "../../../assets/home/header1.png";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/auth";
 
 interface Props {
   setRegisterOpen: (isOpen: boolean) => void;
@@ -11,7 +11,7 @@ export const Header = ({
   setIsLoginOpen,
   setRegisterOpen,
 }: Props): JSX.Element => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user, logOut } = useAuth();
   return (
     <header>
       <nav className="bg-white border-b-gray-200 border border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
@@ -26,8 +26,20 @@ export const Header = ({
               Caminho do Lar
             </span> */}
           </a>
-          {isAuthenticated ? (
-            <p className="flex items-center lg:order-2">Sexo</p>
+          {isAuthenticated && user ? (
+            <div className="flex items-center gap-4 lg:order-2">
+              <img
+                src={user.avatar}
+                alt="Avatar"
+                className="w-10 h-10 cursor-pointer rounded-full mr-3"
+              />
+              <button
+                onClick={logOut}
+                className="text-gray-800 dark:text-white transition ease-in-out delay-75 hover:bg-gray-100 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none"
+              >
+                Sair
+              </button>
+            </div>
           ) : (
             <div className="flex items-center lg:order-2">
               <button
@@ -82,7 +94,7 @@ export const Header = ({
             </div>
           )}
 
-          <div
+          {/* <div
             className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
           >
@@ -104,7 +116,7 @@ export const Header = ({
                 </a>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </nav>
     </header>

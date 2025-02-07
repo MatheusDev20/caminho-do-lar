@@ -1,15 +1,18 @@
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { createContext, useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { DELETE, GET, POST } from "../libs/axios/handlers";
-import { redirect } from "react-router-dom";
+import { AuthResponse } from "../@types";
+import { timeout } from "../utils/utils";
 
 interface AuthContextProps {
   isAuthenticated: boolean;
-  logIn: (email: string, password: string) => Promise<void>;
+  logIn: (data: { email: string; password: string }) => Promise<void>;
   logOut: () => void;
   checkAuth: () => Promise<void>;
+  user: any;
+  loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -18,24 +21,29 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<any | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const logIn = async (email: string, password: string): Promise<void> => {
+  const logIn = async (data: {
+    email: string;
+    password: string;
+  }): Promise<void> => {
     try {
-      await POST({
+      await timeout(1500);
+      const { body } = await POST<AuthResponse>({
         authenticated: true,
         path: "/api/login",
-        body: { username: email, password },
+        body: { username: data.email, password: data.password },
         headers: { "Content-Type": "application/json" },
       });
       setIsAuthenticated(true);
-      redirect("/home");
+      setUser(body.user);
     } catch (error) {
       console.error("Login failed:", error);
       setIsAuthenticated(false);
     }
   };
 
-  // Function to log out the user
   const logOut = async (): Promise<void> => {
     await DELETE({
       authenticated: true,
@@ -44,26 +52,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setIsAuthenticated(false);
   };
 
-  // Function to check if the user is authenticated (called on initial load)
   const checkAuth = async (): Promise<void> => {
     try {
-      await GET({
+      setLoading(true);
+      const { body } = await GET<AuthResponse>({
         path: "/api/check-auth",
         authenticated: true,
       });
       setIsAuthenticated(true);
-    } catch {
+      setUser(body.user);
+    } catch (err) {
       setIsAuthenticated(false);
+      setUser(null);
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Check authentication on initial load
   useEffect(() => {
     checkAuth();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, logIn, logOut, checkAuth }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, logIn, logOut, checkAuth, user, loading }}
+    >
       {children}
     </AuthContext.Provider>
   );
