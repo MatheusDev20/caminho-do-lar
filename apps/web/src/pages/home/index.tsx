@@ -25,7 +25,7 @@ export const Home: React.FC = () => {
     <main className="flex flex-col md:p-12 gap-12">
       <HighlightSection />
       {/* Display X results */}
-      <div className="w-full max-w-[1470px] 2xl:w-full 2xl:mx-auto flex p-6 justify-between items-center bg-gray-50">
+      {/* <div className="w-full max-w-[1470px] 2xl:w-full 2xl:mx-auto flex p-6 justify-between items-center bg-gray-50">
         <p className="text-xs md:text-lg">
           Exibindo{" "}
           <span className="text-primary-700 font-semibold">1 a 12</span> de{" "}
@@ -61,7 +61,7 @@ export const Home: React.FC = () => {
           </div>
           pets por página
         </div>
-      </div>
+      </div> */}
       {/* Pets Paginated list more filters */}
       <section className="max-w-[1470px] 2xl:w-full 2xl:mx-auto flex flex-col md:flex-row gap-6">
         {/* Filters: Refine your search */}

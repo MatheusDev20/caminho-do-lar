@@ -4,16 +4,21 @@ import { LoginModal, RegisterModal } from "./components/Modals";
 import { useModals } from "./context/ modal-context";
 import { useAuth } from "./context/auth";
 import { AppRoutes } from "./routes/routes";
-import React from "react";
+import React, { useState } from "react";
 
 export const App = (): JSX.Element | null => {
+  const [dropDown, setDropdown] = useState(false);
   const { loading } = useAuth();
-
   const { close, open, loginModal, registerModal } = useModals();
 
   if (loading) return null;
   return (
-    <div className="min-h-screen flex flex-col">
+    <div
+      className="min-h-screen flex flex-col"
+      onClick={() => {
+        setDropdown(false);
+      }}
+    >
       <Header
         setRegisterOpen={() => {
           open("register");
@@ -21,6 +26,8 @@ export const App = (): JSX.Element | null => {
         setIsLoginOpen={() => {
           open("login");
         }}
+        setDropdown={setDropdown}
+        isDropdownOpen={dropDown}
       />
       <div className="flex-grow">
         <LoginModal

@@ -13,6 +13,7 @@
     "run-migrations": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.5.0",
     "@repo/typescript-config": "workspace:*",
     "@types/connect-pg-simple": "^7.0.3",
     "@types/express-session": "^1.18.1",

@@ -4,7 +4,6 @@ import { RegisterPetData } from "../interfaces";
 import { HafApi } from "./haf_backend";
 import { PetPageParams } from "../@types";
 import { convertQueryParams, GET } from "../libs/axios/handlers";
-import { timeout } from "../utils/utils";
 
 export const getPetsList = async (data: PetPageParams): Promise<Pet[]> => {
   const currentPage = data.page;
@@ -12,7 +11,6 @@ export const getPetsList = async (data: PetPageParams): Promise<Pet[]> => {
     ...data.filters,
     page: currentPage,
   });
-  await timeout(10000);
   const res = await GET<Pet[]>({ authenticated: false, path: fullPath });
 
   return res.body;
