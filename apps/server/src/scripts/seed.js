@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-plusplus */
 /* eslint-disable import/no-extraneous-dependencies */
-import axios from 'axios';
-import { faker } from '@faker-js/faker';
+const { faker } = require('@faker-js/faker');
+const axios = require('axios');
 
-const NUM_REQUESTS = 100;
-const BASE_URL = 'http://localhost/api/pet';
+const NUM_REQUESTS = 2000;
+const BASE_URL = 'http://localhost:3001/api/pet';
+
+// Defina o valor do cookie conforme necessário
+const COOKIE_VALUE = 'Cookie Value';
 
 async function criarPet() {
   const petData = {
@@ -20,21 +24,28 @@ async function criarPet() {
   };
 
   try {
-    const response = await axios.post(BASE_URL, petData);
+    const response = await axios.post(
+      BASE_URL,
+      petData,
+      {
+        headers: {
+
+          Cookie: `connect.sid=${COOKIE_VALUE}`,
+        },
+      },
+    );
     console.log(`Pet criado com status: ${response.status}`);
   } catch (error) {
+    console.log('e', error);
     console.error('Erro ao criar pet:', error.message);
   }
 }
 
 async function main() {
   const promises = [];
-
   for (let i = 0; i < NUM_REQUESTS; i++) {
     promises.push(criarPet());
   }
-
-  // Executa todas as requisições em paralelo
   await Promise.all(promises);
 }
 

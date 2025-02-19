@@ -10,6 +10,7 @@ import {
   makeListPetPageController,
   makeGetPetInformationController,
 } from '../factories/pets-factory';
+import { checkAuth } from '../middlewares/check-auth';
 
 const upload = multer(uploadConfig);
 
@@ -25,6 +26,7 @@ export default (router: Router): void => {
     body('city').notEmpty(),
     body('uf').notEmpty(),
     body('specie').notEmpty(),
+    checkAuth,
     routeAdapter(makeCreatePetController()),
   );
 

@@ -9,7 +9,7 @@ import { Spinner } from "../../components/spinner";
 import NotFoundDog from "../../../assets/home/not-found-dog.png";
 
 export const Home: React.FC = () => {
-  const { filters, change, clear, pageOptions } = useFilters();
+  const { filters, change, clear } = useFilters();
   const { petList, isLoading } = useHomeList({ filters, page: "1" });
 
   const hasAnyFilter = Object.values(filters).some(
@@ -20,7 +20,7 @@ export const Home: React.FC = () => {
   ).length;
 
   const emptyPetList = petList?.length === 0;
-
+  console.log(petList);
   return (
     <main className="flex flex-col md:p-12 gap-12">
       <HighlightSection />

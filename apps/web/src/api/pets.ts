@@ -7,10 +7,15 @@ import { convertQueryParams, GET } from "../libs/axios/handlers";
 
 export const getPetsList = async (data: PetPageParams): Promise<Pet[]> => {
   const currentPage = data.page;
+
+  const filters = Object.fromEntries(
+    Object.entries(data.filters).filter(([_, value]) => value !== "Todos"),
+  );
   const fullPath = convertQueryParams("/api/pet/list/", {
-    ...data.filters,
+    ...filters,
     page: currentPage,
   });
+
   const res = await GET<Pet[]>({ authenticated: false, path: fullPath });
 
   return res.body;
