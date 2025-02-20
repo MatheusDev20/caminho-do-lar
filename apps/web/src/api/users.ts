@@ -1,6 +1,6 @@
 /* eslint-disable no-unreachable */
 import { RegisterNewUser } from "../@types";
-import { LoginData } from "../interfaces";
+import { LoginData } from "../types";
 import { GET, POST } from "../libs/axios/handlers";
 
 export const logIn = async (authData: LoginData): Promise<any> => {

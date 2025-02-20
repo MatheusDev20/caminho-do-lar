@@ -1,17 +1,20 @@
 import React from "react";
 import { Heart } from "../icons/heart.icon";
-import { Pet } from "../../interfaces/pet";
+import { Pet } from "../../types/pet";
 
 interface Props {
   petInformation: Pet;
 }
 
 export const PetCard = ({ petInformation }: Props): JSX.Element => {
+  const photos = JSON.parse(petInformation.pet_photos);
+  const [main] = photos;
+
   return (
     <div className="bg-white cursor-pointer rounded-lg shadow flex flex-col items-stretch transition-transform transform hover:scale-105 duration-300 group">
       <header
         style={{
-          backgroundImage: `url(https://www.soidog.org/sites/default/files/Dogs_for_adoption.jpg)`,
+          backgroundImage: `url(${main.url as string})`,
         }}
         className="rounded-t-lg relative bg-gray-200 h-48 md:h-48 bg-cover bg-no-repeat bg-center"
       >

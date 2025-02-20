@@ -5,7 +5,7 @@ import {
   DogSizeOptions,
   DogSpeciesOptions,
 } from "../../utils/constants";
-import { Filters } from "../../interfaces";
+import { Filters } from "../../types";
 import { FilterParams } from "../../hooks/useFilters";
 
 type Props = {

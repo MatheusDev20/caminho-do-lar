@@ -26,16 +26,11 @@ class UploadPetPhotosUseCase implements UploadPetPhotos {
   }
 
   public async upload({ userId, petName, filenames }: Request): Promise<Photo[]> {
-    // Query para achar todos os cachorros daquele usuario
     const dogs = await this.repository.findUserPets(userId);
-    if (!dogs) {
-      throw new AppError('This user have no dogs registerd');
-    }
-    const selectedDog = dogs.find((pet) => pet.name === petName);
+    if (!dogs) throw new AppError('This user have no dogs registerd');
 
-    if (!selectedDog) {
-      throw new AppError('Dog with this name was not Found');
-    }
+    const selectedDog = dogs.find((pet) => pet.name === petName);
+    if (!selectedDog) { throw new AppError('Dog with this name was not Found'); }
 
     const uploadedFiles = await this.storage.uploadMultipleFiles(filenames, 'dogs');
 

@@ -4,7 +4,11 @@ import RightPaw from "../../../../../assets/home/right-section.png";
 import { useAuth } from "../../../../context/auth";
 import { useModals } from "../../../../context/ modal-context";
 
-export const HighlightSection = (): JSX.Element => {
+export const HighlightSection = ({
+  quantity,
+}: {
+  quantity: number;
+}): JSX.Element => {
   const { isAuthenticated } = useAuth();
   const { open } = useModals();
   const handleNewPet = (): void => {
@@ -23,8 +27,8 @@ export const HighlightSection = (): JSX.Element => {
       />
       <h1 className="text-center mb-10 text-sm md:text-2xl z-10">
         Encontramos
-        <span className="text-primary-500 ml-2">653</span> animais cadastrados a
-        procura de um lar
+        <span className="text-primary-500 ml-2">{quantity}</span> animais
+        cadastrados a procura de um lar
         <span className="ml-2">🏡</span>
         <span className="ml-2">🐾</span>
       </h1>

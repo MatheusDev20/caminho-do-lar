@@ -1,4 +1,4 @@
-import { LoginData } from "../interfaces";
+import { LoginData } from "../types";
 
 export interface User {
   id: string;

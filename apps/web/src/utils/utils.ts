@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import { Pet } from "./../interfaces/pet";
+import { Pet } from "../types/pet";
 
 export const parsePetImg = (pet: Pet): string => {
   return JSON.parse(pet.pet_photos)[0].url;

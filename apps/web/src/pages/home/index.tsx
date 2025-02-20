@@ -10,7 +10,7 @@ import NotFoundDog from "../../../assets/home/not-found-dog.png";
 
 export const Home: React.FC = () => {
   const { filters, change, clear } = useFilters();
-  const { petList, isLoading } = useHomeList({ filters, page: "1" });
+  const { petList, count, isLoading } = useHomeList({ filters, page: "1" });
 
   const hasAnyFilter = Object.values(filters).some(
     (filter) => filter !== "Todos",
@@ -20,48 +20,11 @@ export const Home: React.FC = () => {
   ).length;
 
   const emptyPetList = petList?.length === 0;
-  console.log(petList);
+
   return (
     <main className="flex flex-col md:p-12 gap-12">
-      <HighlightSection />
+      <HighlightSection quantity={count} />
       {/* Display X results */}
-      {/* <div className="w-full max-w-[1470px] 2xl:w-full 2xl:mx-auto flex p-6 justify-between items-center bg-gray-50">
-        <p className="text-xs md:text-lg">
-          Exibindo{" "}
-          <span className="text-primary-700 font-semibold">1 a 12</span> de{" "}
-          <span className="text-primary-700 font-semibold">36</span> pets por
-          página
-        </p>
-        <div className="flex px-4 gap-2 items-center">
-          Mostrar{" "}
-          <div className="relative w-14 cursor-pointer">
-            <select className="appearance-none w-full p-2 border cursor-pointer border-gray-300 rounded text-sm focus:outline-none">
-              {pageOptions.map((p) => (
-                <option key={p} value={String(p)}>
-                  {String(p)}
-                </option>
-              ))}
-            </select>
-            <div className="absolute inset-y-0 right-1 flex items-center pointer-events-none">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4 text-gray-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </div>
-          </div>
-          pets por página
-        </div>
-      </div> */}
       {/* Pets Paginated list more filters */}
       <section className="max-w-[1470px] 2xl:w-full 2xl:mx-auto flex flex-col md:flex-row gap-6">
         {/* Filters: Refine your search */}

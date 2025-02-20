@@ -29,17 +29,12 @@ export default (router: Router): void => {
     checkAuth,
     routeAdapter(makeCreatePetController()),
   );
-
-  router.post('/pet/upload', upload.array('photos', 4), routeAdapter(makeUploadPetPhotosController()));
-
-  // router.get('/pet', adapter(makeListUserPetsController()));
-
+  router.post('/pet/upload', checkAuth, upload.array('photos', 4), routeAdapter(makeUploadPetPhotosController()));
   router.get(
     '/pet/list',
     query('page').notEmpty().isNumeric(),
     routeAdapter(makeListPetPageController()),
   );
-
   router.get(
     '/pet/:id',
     param('id').notEmpty(),

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getPetsList } from "../../api/pets";
 import { FilterParams } from "../useFilters";
-import { Pet } from "../../interfaces/pet";
+import { Pet } from "../../types/pet";
 
 type Hook = {
   filters: FilterParams;
@@ -11,16 +11,25 @@ type Hook = {
 type HookOutput = {
   petList: Pet[] | undefined;
   isLoading: boolean;
+  count: number;
 };
+
 export const useHomeList = ({ filters, page }: Hook): HookOutput => {
-  const { data, isLoading, error } = useQuery({
+  const {
+    data: apiResponse,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["pet_home_list"],
     queryFn: async () => await getPetsList({ filters, page }),
   });
-  const list = data && data.length === 0 ? [] : data;
+
+  const list = apiResponse?.collection ? apiResponse.collection : [];
+  const count = apiResponse?.count ?? 0;
 
   return {
     isLoading,
     petList: list,
+    count,
   };
 };

@@ -27,7 +27,7 @@ class S3Storage implements Storage {
     const promises = filenames.map(async (filename) => {
       const originalPath = path.resolve(upload.directory, filename);
       const fileContent = await fs.promises.readFile(originalPath);
-      const ret = await this.s3Client.putObject({
+      await this.s3Client.putObject({
         Bucket: process.env.BUCKET_NAME,
         Key: buildPathS3(filename, resource),
         ACL: 'public-read',
@@ -45,7 +45,7 @@ class S3Storage implements Storage {
     const originalPath = path.resolve(upload.directory, fileName);
     const fileContent = await fs.promises.readFile(originalPath);
 
-    const ret = await this.s3Client.putObject({
+    await this.s3Client.putObject({
       Bucket: process.env.BUCKET_NAME,
       Key: buildPathS3(fileName, resource),
       ACL: 'public-read',

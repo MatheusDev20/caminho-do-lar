@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-param-reassign */
 import { Repository } from 'typeorm';
@@ -73,25 +74,18 @@ class PetsRepository implements IPetsRepository {
     return photos;
   }
 
-  public async getPage(page: string, filters: any): Promise<Pets[] | undefined> {
+  public async getPage(page: string, filters: any): Promise<{collection: Pets[], count: number} | undefined> {
     const skip = (Number(page) - 1) * 10;
-    if (!filters) {
-      const [result] = await this.petsRepository.findAndCount({
-        take: 10,
-        skip,
-      });
-      return result;
-    }
     Object.keys(filters).forEach((key) => {
       if (!filters[key]) { delete filters[key]; }
     });
-    const [filtered] = await this.petsRepository.findAndCount({
+
+    const [filtered, count] = await this.petsRepository.findAndCount({
       where: filters,
       take: 10,
       skip,
     });
-
-    return filtered;
+    return { collection: filtered, count };
   }
 
   public async findByID(id: string): Promise<Pet> {

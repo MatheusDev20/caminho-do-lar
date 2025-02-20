@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { IPetsRepository } from '../../protocols/repositorys/pets-repository';
 import { IGetPetPage } from '../../../domain/pets/usecases/get-pet-page';
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -10,7 +11,7 @@ export class GetPetPage implements IGetPetPage {
     this.repository = repository;
   }
 
-  public async getPage(page: string, filters: any): Promise<Pets[] | undefined> {
+  public async getPage(page: string, filters: any): Promise<{collection: Pets[], count: number} | undefined> {
     const dbResponse = this.repository.getPage(page, filters);
     return dbResponse;
   }

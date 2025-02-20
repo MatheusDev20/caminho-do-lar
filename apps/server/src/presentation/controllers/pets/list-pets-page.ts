@@ -22,6 +22,6 @@ export class ListPetPage implements Controller {
     const filters = { size, gender, specie };
     const res = await this.useCase.getPage(page as string, filters);
 
-    return response.json(res);
+    return response.json({ data: res?.collection, count: res?.count });
   }
 }

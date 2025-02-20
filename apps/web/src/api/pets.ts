@@ -1,11 +1,13 @@
-import { Pet } from "../interfaces/pet";
+import { Pet } from "../types/pet";
 
-import { RegisterPetData } from "../interfaces";
+import { RegisterPetData } from "../types";
 import { HafApi } from "./haf_backend";
 import { PetPageParams } from "../@types";
 import { convertQueryParams, GET } from "../libs/axios/handlers";
 
-export const getPetsList = async (data: PetPageParams): Promise<Pet[]> => {
+export const getPetsList = async (
+  data: PetPageParams,
+): Promise<{ collection: Pet[]; count: number }> => {
   const currentPage = data.page;
 
   const filters = Object.fromEntries(
@@ -16,9 +18,12 @@ export const getPetsList = async (data: PetPageParams): Promise<Pet[]> => {
     page: currentPage,
   });
 
-  const res = await GET<Pet[]>({ authenticated: false, path: fullPath });
+  const res = await GET<{ data: Pet[]; count: number }>({
+    authenticated: false,
+    path: fullPath,
+  });
 
-  return res.body;
+  return { collection: res.body.data, count: res.body.count };
 };
 
 export const uploadImages = async (
