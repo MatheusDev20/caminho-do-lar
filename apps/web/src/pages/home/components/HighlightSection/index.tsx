@@ -25,7 +25,7 @@ export const HighlightSection = ({
         alt="Left Paw"
         className="absolute top-[-0.5px] left-[5%] 2xl:h-36 h-4 md:h-28"
       />
-      <h1 className="text-center mb-10 mt-4 md:mt-0 text-xs md:text-2xl z-10">
+      <h1 className="text-center mb-10 mt-4 md:mt-0 text-xs md:text-[] z-10">
         Encontramos
         <span className="text-primary-500 ml-1 mr-1 md:ml-2">{quantity}</span>
         animais cadastrados a procura de um lar
