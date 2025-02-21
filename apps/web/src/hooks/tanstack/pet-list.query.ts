@@ -20,7 +20,7 @@ export const useHomeList = ({ filters, page }: Hook): HookOutput => {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["pet_home_list"],
+    queryKey: ["pet_home_list", { page }],
     queryFn: async () => await getPetsList({ filters, page }),
   });
 

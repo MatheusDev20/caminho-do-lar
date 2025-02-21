@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FunnelIcon } from "../../components/icons/funner.icon";
 import { Filter } from "../../components/Filter/index";
 import { useFilters } from "../../hooks/useFilters";
@@ -7,20 +7,33 @@ import { PetCard } from "../../components/PetCard";
 import { useHomeList } from "../../hooks/tanstack/pet-list.query";
 import { Spinner } from "../../components/spinner";
 import NotFoundDog from "../../../assets/home/not-found-dog.png";
+import { PaginationFooter } from "./components/pagination";
 
 export const Home: React.FC = () => {
+  const [page, setPage] = useState(1);
+
   const { filters, change, clear } = useFilters();
-  const { petList, count, isLoading } = useHomeList({ filters, page: "1" });
+  const { petList, count, isLoading } = useHomeList({
+    filters,
+    page: String(page),
+  });
 
   const hasAnyFilter = Object.values(filters).some(
     (filter) => filter !== "Todos",
   );
+
   const filtersAppliedLength = Object.values(filters).filter(
     (v) => v !== "Todos",
   ).length;
 
   const emptyPetList = petList?.length === 0;
 
+  const handleNextPage = (): void => {
+    setPage((previous) => previous + 1);
+  };
+  const handlePrevious = (): void => {
+    setPage((previous) => previous - 1);
+  };
   return (
     <main className="flex flex-col md:p-12 gap-12">
       <HighlightSection quantity={count} />
@@ -57,26 +70,37 @@ export const Home: React.FC = () => {
         </div>
 
         {/* Pets Grid */}
-        <div
-          className={`flex-grow shadow-md w-full ${!isLoading && !emptyPetList ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-3" : "flex justify-center items-center"} rounded-lg p-4 gap-8`}
-        >
-          {petList?.length === 0 && (
-            <div className="w-full flex p-2 items-center flex-col gap-8 justify-center">
-              <h4 className="text-primary-500 2xl:text-lg text-md">
-                Não foi encontrado nenhum Pet na pesquisa
-              </h4>
-              <img src={NotFoundDog} />
-            </div>
-          )}
-          {/* Placeholder for pet cards */}
-          {isLoading && (
-            <Spinner
-              textClass="text-primary-500"
-              size="md"
-              text="Carregando resultados"
-            />
-          )}
-          {petList?.map((pet) => <PetCard key={pet.id} petInformation={pet} />)}
+        <div className="w-full flex gap-6 p-0 flex-col">
+          <div
+            className={`flex-grow shadow-md w-full ${!isLoading && !emptyPetList ? "auto-rows-max grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-3" : "flex justify-center items-center"} rounded-lg p-4 gap-8`}
+          >
+            {petList?.length === 0 && (
+              <div className="w-full flex p-2 items-center flex-col gap-8 justify-center">
+                <h4 className="text-primary-500 2xl:text-lg text-md">
+                  Não foi encontrado nenhum Pet na pesquisa
+                </h4>
+                <img src={NotFoundDog} />
+              </div>
+            )}
+            {/* Placeholder for pet cards */}
+            {isLoading && (
+              <Spinner
+                textClass="text-primary-500"
+                size="md"
+                text="Carregando resultados"
+              />
+            )}
+            {petList?.map((pet) => (
+              <PetCard key={pet.id} petInformation={pet} />
+            ))}
+          </div>
+          <PaginationFooter
+            currentPage={page}
+            quantity={count}
+            prev={handlePrevious}
+            next={handleNextPage}
+            set={setPage}
+          />
         </div>
       </section>
     </main>
