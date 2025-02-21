@@ -82,7 +82,8 @@ class PetsRepository implements IPetsRepository {
 
     const [filtered, count] = await this.petsRepository.findAndCount({
       where: filters,
-      take: 10,
+      // This is fixed.
+      take: 9,
       skip,
     });
     return { collection: filtered, count };
