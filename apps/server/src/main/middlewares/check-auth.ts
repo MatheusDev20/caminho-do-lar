@@ -20,9 +20,8 @@ export const logIn = (req: any, res: any, next: NextFunction) => {
     }
 
     req.logIn(user, (loginErr: any) => {
-      if (loginErr) {
-        return res.status(500).json({ message: 'Login failed' });
-      }
+      if (loginErr) { return res.status(500).json({ message: 'Login failed' }); }
+
       const {
         password, created_at, updated_at, ...authUser
       } = user;

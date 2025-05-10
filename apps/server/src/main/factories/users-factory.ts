@@ -11,7 +11,6 @@ import UpdateUserAvatarUseCase from '../../data/users/usecases/update-user-avata
 import S3Storage from '../../infra/storage/S3';
 import UpdateUserAvatarController from '../../presentation/controllers/users/update-user-avatar-controller';
 import AuthorizationUseCase from '../../data/auth/login-usecase';
-import AuthController from '../../presentation/controllers/auth/login-controller';
 import DeleteUserController from '../../presentation/controllers/users/delete-user-controller';
 import DeleteUserUseCase from '../../data/users/usecases/delete-user-usecase';
 import RegisterNewUserController from '../../presentation/controllers/users/register-new-user-controller';
@@ -33,14 +32,6 @@ const makeDeleteUserController = (): Controller => {
   const deleteUserUseCase = new DeleteUserUseCase(userRepository);
   const deleteUserController = new DeleteUserController(deleteUserUseCase);
   return deleteUserController;
-};
-
-const makeAuthUserController = (): Controller => {
-  const usersRepository = new UserRepository();
-  const generateJwt = new JwtAdapter();
-  const authorizationUseCase = new AuthorizationUseCase(usersRepository, generateJwt);
-  const authController = new AuthController(authorizationUseCase);
-  return authController;
 };
 
 const makeAvatarUpload = (): Controller => {
@@ -100,7 +91,6 @@ const makeCheckAuthController = (): Controller => {
 export {
   makeSignUpUserController,
   makeDeleteUserController,
-  makeAuthUserController,
   makeAvatarUpload,
   makeUserProfile,
   makeForgotPasswordController,

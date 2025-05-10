@@ -20,7 +20,7 @@ export const enableError = (err: Error | Result<ValidationError>, request: Reque
       errors: err.errors.array(),
     });
   }
-  console.error('Ta dando merda aqui -->', err);
+  console.error('Something Weird is Happening -->', err);
   return response.status(500).json({
     status: 'error',
     message: 'Internal Server Error',
