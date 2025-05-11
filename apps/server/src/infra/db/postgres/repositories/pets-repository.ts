@@ -79,11 +79,10 @@ class PetsRepository implements IPetsRepository {
     Object.keys(filters).forEach((key) => {
       if (!filters[key]) { delete filters[key]; }
     });
-
     const [filtered, count] = await this.petsRepository.findAndCount({
       where: filters,
       // This is fixed.
-      take: 9,
+      take: 10,
       skip,
     });
     return { collection: filtered, count };
