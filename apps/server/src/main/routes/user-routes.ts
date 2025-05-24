@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 import { Router, Request, Response } from 'express';
 import multer from 'multer';
-import { body, query } from 'express-validator';
+import { body } from 'express-validator';
 import * as factories from '../factories/users-factory';
 import { Controller } from '../../presentation/protocols/controller';
 import uploadConfig from '../../config/storage/upload';
@@ -52,13 +52,4 @@ export default (router: Router): void => {
   router.post('/avatar', checkAuth, upload.single('avatar'), adapt(factories.makeAvatarUpload()));
 
   router.get('/getProfile', checkAuth, adapt(factories.makeUserProfile()));
-
-  // Reset Password Routes
-  router.post('/forgot-password', query('email').notEmpty().isEmail(), adapt(factories.makeForgotPasswordController()));
-  router.patch(
-    '/reset-password',
-    body('token').notEmpty().isLength({ min: 16 }),
-    body('newPassword').notEmpty().isLength({ min: 8 }),
-    adapt(factories.makeResetPasswordController()),
-  );
 };

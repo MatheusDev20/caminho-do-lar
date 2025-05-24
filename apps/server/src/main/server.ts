@@ -1,3 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import 'reflect-metadata';
+
 import dotenv from 'dotenv';
 import { source } from '../infra/db/helpers/postgres-conn-helper';
 import app from './config/app';

@@ -1,0 +1,16 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: matheusdev20
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: caminha-do-lar
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: caminho-do-lar-api
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+
+functions:
+  api:
+    handler: server.handler
+    events:
+      - httpApi: "*"
