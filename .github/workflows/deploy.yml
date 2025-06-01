@@ -1,0 +1,65 @@
+name: Deploy API
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/api/**"
+      - "packages/**" 
+      - "tsconfig.*"
+      - "package.json"
+      - "pnpm-lock.yaml" 
+
+jobs:
+  api-deploy:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node & pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm" 
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Build API
+        run: pnpm turbo run build --filter="@repo/server"
+
+      - name: Pack dist
+        run: |
+          cd apps/server
+          tar -czf ../../api-dist.tar.gz \
+            dist \
+            package.json \
+            package-lock.json \
+          cd ../../
+
+      - name: Upload to Droplet
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: root
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          source: "api-dist.tar.gz"
+          target: "/server"
+
+      # - name: Restart PM2
+      #   uses: appleboy/ssh-action@v0.1.6
+      #   with:
+      #     host: ${{ secrets.DROPLET_IP }}
+      #     username: root
+      #     key: ${{ secrets.DROPLET_SSH_KEY }}
+      #     script: |
+      #       cd /server
+      #       tar -xzf api-dist.tar.gz
+      #       pm2 reload cdl-api --update-env
