@@ -36,6 +36,9 @@ jobs:
 
       - name: Build API
         run: pnpm turbo run build --filter="@repo/server"
+      
+      - name: Checking build output
+        run: ls -R apps/server/dist || true
 
       - name: Pack release folder
         run: |
@@ -52,7 +55,7 @@ jobs:
           host: ${{ secrets.DROPLET_IP }}
           username: root
           key: ${{ secrets.DROPLET_SSH_KEY }}
-          source: "api-dist.tar.gz"
+          source: "api-release.tar.gz"
           target: "/server"
 
       # - name: Restart PM2
@@ -63,5 +66,5 @@ jobs:
       #     key: ${{ secrets.DROPLET_SSH_KEY }}
       #     script: |
       #       cd /server
-      #       tar -xzf api-dist.tar.gz
+      #       tar -xzf api-releasetar.gz
       #       pm2 reload cdl-api --update-env
