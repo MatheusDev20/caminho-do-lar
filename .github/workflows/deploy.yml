@@ -37,14 +37,14 @@ jobs:
       - name: Build API
         run: pnpm turbo run build --filter="@repo/server"
 
-      - name: Pack dist
+      - name: Pack release folder
         run: |
-          cd apps/server
-          tar -czf ../../api-dist.tar.gz \
-            dist \
-            package.json \
-            package-lock.json \
-          cd ../../
+          RELEASE=api-release
+          mkdir -p $RELEASE
+          cp -r apps/server/dist $RELEASE/
+          cp apps/server/package.json $RELEASE/
+          cp pnpm-lock.yaml $RELEASE/
+          tar -czf api-release.tar.gz $RELEASE
 
       - name: Upload to Droplet
         uses: appleboy/scp-action@v0.1.3

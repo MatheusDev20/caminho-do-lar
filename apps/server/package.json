@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rimraf dist && tsc",
+    "post:build": "cp ./package.json dist && cp ./package-lock.json dist",
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/main/server.ts",
     "start-prod": "npm run build && node dist/main/server.js",
     "start": "node dist/main/server.js",
