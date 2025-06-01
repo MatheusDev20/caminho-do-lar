@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import 'reflect-metadata';
-
 import dotenv from 'dotenv';
+import serverless from 'serverless-http';
 import { source } from '../infra/db/helpers/postgres-conn-helper';
 import app from './config/app';
+
 import setupRoutes from './config/setup-routes';
 import { enableError } from './middlewares/error';
 
@@ -20,3 +20,5 @@ app.listen(process.env.PORT, async () => {
   app.use(enableError);
   console.log(`App Running on PORT: ${process.env.PORT}`);
 });
+
+export const handler = serverless(app);

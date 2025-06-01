@@ -1,10 +1,10 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Controller } from 'presentation/protocols/controller';
 
 import { Request, Response } from 'express';
 import UploadDogsImagesUseCase from '../../../data/pets/usecases/update-dog-photos';
 import AppError from '../../errors/AppError';
+import { Controller } from '../../protocols/controller';
 
 export default class UpdatePetsPhotosController implements Controller {
   private readonly useCase: UploadDogsImagesUseCase;

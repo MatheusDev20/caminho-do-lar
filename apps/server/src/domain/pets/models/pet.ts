@@ -1,4 +1,4 @@
-import { User } from 'domain/user/models/user';
+import { User } from '../../user/models/user';
 
 export interface Pet {
   id: string;
