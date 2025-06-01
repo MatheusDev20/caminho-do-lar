@@ -15,7 +15,6 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^9.5.0",
-    "@repo/typescript-config": "workspace:*",
     "@types/bcryptjs": "^2.4.2",
     "@types/connect-pg-simple": "^7.0.3",
     "@types/cors": "^2.8.12",
