@@ -58,13 +58,22 @@ jobs:
           source: "api-release.tar.gz"
           target: "/server"
 
-      # - name: Restart PM2
-      #   uses: appleboy/ssh-action@v0.1.6
-      #   with:
-      #     host: ${{ secrets.DROPLET_IP }}
-      #     username: root
-      #     key: ${{ secrets.DROPLET_SSH_KEY }}
-      #     script: |
-      #       cd /server
-      #       tar -xzf api-releasetar.gz
-      #       pm2 reload cdl-api --update-env
+      - name: Extract & (re)start PM2
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: root
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          script: |
+            set -e
+            cd /server
+            tar -xzf api-release.tar.gz
+            cd api-release
+            mv .env /api-release
+            pnpm install --prod
+            if pm2 describe cdl-api > /dev/null; then
+              pm2 reload cdl-api --update-env
+            else
+              pm2 start ecosystem.config.cjs
+              pm2 save
+            fi
