@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import dotenv from 'dotenv';
-import serverless from 'serverless-http';
 import { source } from '../infra/db/helpers/postgres-conn-helper';
 import app from './config/app';
 
@@ -22,4 +21,4 @@ app.listen(process.env.PORT, async () => {
   console.log('Verifying Action CI');
 });
 
-export const handler = serverless(app);
+export const handler = app;
