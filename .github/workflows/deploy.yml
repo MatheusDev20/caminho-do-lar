@@ -67,9 +67,8 @@ jobs:
           script: |
             set -e
             cd /server
-            mv .env /api-release
             tar -xzf api-release.tar.gz
-            cd api-release
+            mv .env api-release/.env || true
             cd api-release && pnpm install --prod
             if pm2 describe cdl-api > /dev/null; then
               pm2 reload cdl-api --update-env
