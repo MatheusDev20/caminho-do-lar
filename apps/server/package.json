@@ -12,7 +12,7 @@
     "start": "node dist/main/server.js",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "run-migrations": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "run-migrations:production": "node dist/node_modules/typeorm/cli.js"
+    "run-migrations:production": "node node_modules/typeorm/cli.js"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.5.0",
