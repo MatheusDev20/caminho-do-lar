@@ -4,9 +4,9 @@ import { LoginModal, RegisterModal } from "../../site/src/components/Modals";
 import { useModals } from "./context/ modal-context";
 import { useAuth } from "./context/auth";
 import { AppRoutes } from "../../site/src/routes/routes";
-import { useState, type JSX } from "react";
+import { useState } from "react";
 
-export const App = (): JSX.Element | null => {
+export const App = () => {
   const [dropDown, setDropdown] = useState(false);
   const { loading } = useAuth();
   const { close, open, loginModal, registerModal } = useModals();

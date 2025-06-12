@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from "react";
 
 type ProgressBarProps = {
   duration: number;
@@ -10,7 +11,7 @@ const ProgressBar = ({
   duration,
   onComplete,
   speed = 50,
-}: ProgressBarProps): JSX.Element => {
+}: ProgressBarProps) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {

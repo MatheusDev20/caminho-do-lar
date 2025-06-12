@@ -1,6 +1,5 @@
-import React from "react";
 
-export const ChevronUpIcon = (): JSX.Element => {
+export const ChevronUpIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

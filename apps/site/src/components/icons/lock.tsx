@@ -1,10 +1,10 @@
-import React from "react";
+
 
 interface Props {
   tClass: string;
 }
 
-export const Lock = ({ tClass }: Props): JSX.Element => {
+export const Lock = ({ tClass }: Props) => {
   return (
     <svg
       fill="none"

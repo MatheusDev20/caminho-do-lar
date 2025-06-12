@@ -1,8 +1,7 @@
 import { Home } from "@/pages/home";
-import type { JSX } from "react";
 import { Route, Routes } from "react-router-dom";
 
-export const AppRoutes = (): JSX.Element => {
+export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />

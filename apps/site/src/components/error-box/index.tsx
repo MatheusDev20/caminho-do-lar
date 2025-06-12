@@ -51,7 +51,7 @@ export const FeedbackBox = ({
   onClose,
   redirectTo,
   iconSize = "text-md",
-}: Props): JSX.Element => {
+}: Props) => {
   const { bg, border, text: textColor, icon: Icon, iconColor } = pallete[type];
 
   return (

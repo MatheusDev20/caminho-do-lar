@@ -1,4 +1,4 @@
-import React from "react";
+
 
 type Props = {
   text: string;
@@ -6,7 +6,7 @@ type Props = {
   textClass?: string;
 };
 
-export const Spinner = ({ text, size, textClass }: Props): JSX.Element => {
+export const Spinner = ({ text, size, textClass }: Props) => {
   const defaultText = "text-sm text-nowrap";
   const getSize = (size: string): string => {
     switch (size) {

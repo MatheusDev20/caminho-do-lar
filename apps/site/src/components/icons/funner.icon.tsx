@@ -4,7 +4,7 @@ type Props = React.SVGProps<SVGSVGElement> & {
   tClass: string;
 };
 
-export const FunnelIcon = ({ tClass }: Props): JSX.Element => {
+export const FunnelIcon = ({ tClass }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

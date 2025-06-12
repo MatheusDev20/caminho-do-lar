@@ -1,6 +1,6 @@
-import React from "react";
 
-export const PaginationLeft = (): JSX.Element => {
+
+export const PaginationLeft = () => {
   return (
     <svg
       className="w-3 h-3 rtl:rotate-180"

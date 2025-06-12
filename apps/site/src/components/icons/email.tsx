@@ -1,10 +1,10 @@
-import React from "react";
+
 
 interface Props {
   tClass: string;
 }
 
-export const EmailIcon = ({ tClass }: Props): JSX.Element => {
+export const EmailIcon = ({ tClass }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
