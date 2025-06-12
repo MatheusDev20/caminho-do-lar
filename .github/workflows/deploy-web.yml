@@ -35,7 +35,7 @@ jobs:
           key: ${{ secrets.DROPLET_SSH_KEY }}
           source: "apps/site/dist/*"
           target: "/server/web"
-          strip_components: 3
+          strip_components: 2
 
       - name: Extract & reload nginx
         uses: appleboy/ssh-action@v0.1.6
