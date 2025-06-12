@@ -24,7 +24,7 @@ jobs:
       - name: Install deps
         run: pnpm install
 
-      - name: Build API
+      - name: Build Frontend
         run: pnpm turbo run build --filter="@repo/site"
 
       - name: Upload to Droplet
