@@ -12,14 +12,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v2
+        with: { version: 8 }
       - uses: actions/setup-node@v4
-        with: { node-version: 20 }
+        with: { node-version: 20, cache: "pnpm" }
 
       - name: Install & build
-        run: |
-          npm install
-          npm run build
-          tar -czf web-build.tar.gz -C apps/web/dist .
+        run: pnpm install -g turbo
+
+      - name: Install deps
+        run: pnpm install
+
+      - name: Build API
+        run: pnpm turbo run build --filter="@repo/site"
 
       - name: Upload to Droplet
         uses: appleboy/scp-action@v0.1.3
