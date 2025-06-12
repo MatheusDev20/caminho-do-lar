@@ -11,7 +11,7 @@
     "start-prod": "npm run build && node dist/main/server.js",
     "start": "node dist/main/server.js",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "run-migrations": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "run-migrations": "ts-node --project ./tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "run-migrations:production": "node node_modules/typeorm/cli.js"
   },
   "devDependencies": {

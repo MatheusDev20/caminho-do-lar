@@ -1,10 +1,9 @@
-import React from "react";
 
 type Props = {
   tClass: string;
 };
 
-export const PersonIcon = ({ tClass }: Props): JSX.Element => {
+export const PersonIcon = ({ tClass }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

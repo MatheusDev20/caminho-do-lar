@@ -1,6 +1,6 @@
-import React from "react";
 
-export const PaginationRigth = (): JSX.Element => {
+
+export const PaginationRigth = () => {
   return (
     <svg
       className="w-3 h-3 rtl:rotate-180"

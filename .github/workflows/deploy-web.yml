@@ -1,0 +1,43 @@
+name: Deploy Web
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/site/**"
+      - ".github/workflows/deploy-web.yml"
+
+jobs:
+  web-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: "pnpm" }
+
+      - name: Install & build
+        run: |
+          npm install
+          npm run build
+          tar -czf web-build.tar.gz -C apps/web/dist .
+
+      - name: Upload to Droplet
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: root
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          source: "web-build.tar.gz"
+          target: "/server/web"
+
+      - name: Extract & reload nginx
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: root
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          script: |
+            cd /server/web
+            tar -xzf web-build.tar.gz
+            rm web-build.tar.gz
+            sudo systemctl reload nginx

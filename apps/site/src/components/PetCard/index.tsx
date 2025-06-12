@@ -1,7 +1,6 @@
 
 import { cn } from "@/lib/utils";
 import { Calendar, Heart, MapPin } from "lucide-react";
-import type { JSX } from "react";
 import { Link } from "react-router-dom";
 import { Badge } from "../ui/badge";
 import type { Pet } from "@/@types/pet";
@@ -10,7 +9,7 @@ type Props = {
   petInformation: Pet
 }
 
-export const PetCard = ({ petInformation }: Props): JSX.Element => {
+export const PetCard = ({ petInformation }: Props) => {
   const photos = JSON.parse(petInformation.pet_photos);
   const [main] = photos;
   console.log(main);
