@@ -22,7 +22,7 @@ jobs:
         run: pnpm install -g turbo
 
       - name: Install deps
-        run: pnpm install --filter=@repo/web --prod
+        run: pnpm install
 
       - name: Build Frontend
         run: pnpm turbo run build --filter="@repo/site"
