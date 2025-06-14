@@ -52,10 +52,4 @@ export default class Pets {
 
   @Column()
     specie: string;
-
-  @CreateDateColumn()
-    createdAt: Date;
-
-  @UpdateDateColumn()
-    updateAt: Date;
 }
