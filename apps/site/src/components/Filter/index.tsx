@@ -9,14 +9,15 @@ import { Filter } from "lucide-react";
 
 type Props = {
   filters: Filters;
+  disabled?: boolean;
   change: Dispatch<SetStateAction<FilterParams>>;
 };
 
-export const PopoverFilter = ({ filters, change }: Props) => {
+export const PopoverFilter = ({ filters, change, disabled }: Props) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button className="cursor-pointer md:h-[52px] bg-rose-500 text-white font-medium hover:bg-rose-600 hover:text-white hover:fonte-bold" variant="outline">
+        <Button disabled={disabled} className="cursor-pointer md:h-[52px] bg-rose-500 text-white font-medium hover:bg-rose-600 hover:text-white hover:fonte-bold" variant="outline">
           Adicionar Filtros
           <Filter className="ml-2 h-4 w-4" />
         </Button>

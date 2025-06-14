@@ -53,7 +53,7 @@ export const Home: React.FC = () => {
                 Limpar ({filtersAppliedLength}) Filtros
               </Button>
             )}
-            <PopoverFilter filters={filters} change={change} />
+            <PopoverFilter filters={filters} change={change} disabled={!petList || petList.length === 0} />
           </div>
       
         </header>
@@ -82,7 +82,8 @@ export const Home: React.FC = () => {
               <PetCard key={pet.id} petInformation={pet} />
             ))}
           </div>
-          <PaginationFooter
+          {petList && petList?.length > 0 && (
+             <PaginationFooter
             currentPage={filters.page}
             quantity={count}
             prev={handlePrevious}
@@ -91,6 +92,8 @@ export const Home: React.FC = () => {
               change((prev) => ({ ...prev, page }));
             }}
           />
+          )}
+         
         </div>
       </section>
     </main>
