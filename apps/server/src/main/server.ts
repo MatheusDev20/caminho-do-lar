@@ -18,7 +18,6 @@ app.listen(process.env.PORT, async () => {
   setupRoutes(app);
   app.use(enableError);
   console.log(`App Running on PORT: ${process.env.PORT}`);
-  console.log('Verifying Action CI');
 });
 
 export const handler = app;
