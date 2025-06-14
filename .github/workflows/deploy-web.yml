@@ -25,6 +25,9 @@ jobs:
         run: pnpm install
 
       - name: Build Frontend
+        env:
+          VITE_URL_DEV: http://localhost:3001
+          VITE_URL_PROD: https://caminhodolar.com.br/backend 
         run: pnpm turbo run build --filter="@repo/site"
 
       - name: Upload to Droplet
