@@ -2,8 +2,8 @@
 import { useAuth } from "../../context/auth";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
-import { PawPrint } from "lucide-react";
 import { Button } from "../ui/button";
+import { PawPrint } from "lucide-react";
 
 interface Props {
   setRegisterOpen: (isOpen: boolean) => void;
@@ -36,14 +36,16 @@ export const Header = ({
         className="bg-white border-b-gray-200 border border-gray-200 py-5 dark:bg-gray-800"
         onClick={closeMenu}
       >
-        <div className="flex flex-wrap justify-center md:justify-between items-center md:pr-12 md:pl-12">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-r from-amber-400 to-rose-400">
-              <PawPrint className="h-5 w-5 text-white" />
+        <div className="flex flex-wrap justify-center md:justify-between items-center md:pr-6 md:pl-6">
+         <div className="flex flex-wrap justify-center md:justify-between items-center md:pr-6 md:pl-6">
+          <Link to="/" className="flex items-center justify-center gap-2">
+            <div className="flex items-center">
+              <PawPrint className="w-8 h-8 text-rose-600 mr-2" />
+              <span className="text-2xl font-bold mt-1 text-rose-600">Caminho</span>
+              <span className="text-2xl font-bold mt-1 text-rose-600 text-primary-700 ml-2">do Lar</span>
             </div>
-            <span className="hidden text-xl font-bold text-gray-900 sm:inline-block">Caminho do Lar</span>
           </Link>
+          </div>
           {isAuthenticated && user ? (
             <div
               className="flex items-center gap-4 cursor-pointer lg:order-2 relative"
