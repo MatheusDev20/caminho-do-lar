@@ -15,7 +15,6 @@ export const getPetsList = async (
   const filters = Object.fromEntries(
     Object.entries(data.filters).filter(([_, value]) => value),
   );
-  console.log("filters", filters);
   const fullPath = convertQueryParams("/api/pet/list/", {
     ...filters,
     page: currentPage,

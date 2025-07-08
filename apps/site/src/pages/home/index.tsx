@@ -58,7 +58,7 @@ export const Home: React.FC = () => {
       
         </header>
         {/* Pets Grid */}
-        <div className="w-full flex gap-6 p-0 flex-col">
+        <div className="w-full flex gap-6 md:p-12 p-0 flex-col">
           <div
             className={`flex-grow shadow-md w-full ${!isLoading && !emptyPetList ? "auto-rows-max grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 2xl:grid-cols-5" : "flex justify-center items-center"} rounded-lg p-4 gap-8`}
           >

@@ -84,7 +84,7 @@ export const Header = ({
                   setIsLoginOpen(true);
                 }}
 
-                className="bg-rose-500 md:min-w-[70px] hover:bg-rose-600 text-white font-bold pr-4 pl-4 cursor-pointer"
+                className="bg-rose-500 md:min-w-[110px] hover:bg-rose-600 text-white font-bold pr-4 pl-4 cursor-pointer"
               >
                 Entrar
               </Button>
