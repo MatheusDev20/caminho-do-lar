@@ -9,6 +9,8 @@ services:
       VITE_URL_DEV: http://localhost:3001
     volumes:
       - ./apps/site/src:/app/apps/site/src
+      - ./apps/site/public:/app/apps/site/public
+      - ./apps/site/index.html:/app/apps/site/index.html
     depends_on:
       - server
 

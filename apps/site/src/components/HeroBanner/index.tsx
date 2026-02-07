@@ -4,7 +4,7 @@ import SideBanner from "@/assets/home/side-pic-banner.jpg"
 
 export default function HeroBanner() {
   return (
-    <div className="relative w-full overflow-hidden bg-gradient-to-r from-amber-50 to-rose-50">
+    <div className="relative w-full overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10">
@@ -24,7 +24,7 @@ export default function HeroBanner() {
       <div className="container mx-auto px-4 py-12 md:py-16 lg:py-20">
         <div className="grid gap-8 md:grid-cols-2 md:gap-12 items-center">
           <div className="space-y-6 text-center md:text-left">
-            <div className="inline-flex items-center rounded-full bg-amber-100 px-3 py-1 text-sm font-medium text-amber-800">
+            <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-amber-800">
               <Heart className="mr-1 h-4 w-4" /> Encontre seu companheiro perfeito
             </div>
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
