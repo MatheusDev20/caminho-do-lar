@@ -1,0 +1,43 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: apps/server/Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: caminho
+      DB_PASSWORD: caminho123
+      DB_NAME: caminho_do_lar
+      ENTITIES_PATH: src/infra/db/postgres/entities/*.ts
+      MIGRATIONS_DIR: src/migrations/*.ts
+      SECRET_JWT: dev-secret-jwt
+      SESSION_SECRET: dev-session-secret
+    volumes:
+      - ./apps/server/src:/app/apps/server/src
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: caminho
+      POSTGRES_PASSWORD: caminho123
+      POSTGRES_DB: caminho_do_lar
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U caminho -d caminho_do_lar"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:

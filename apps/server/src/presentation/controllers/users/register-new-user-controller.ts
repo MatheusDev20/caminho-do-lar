@@ -16,7 +16,6 @@ class RegisterNewUserController implements Controller {
   async handle(request: Request, response: Response): Promise<Response> {
     const validateEntry = validationResult(request);
     if (!validateEntry.isEmpty()) throw new InvalidParamError(validateEntry);
-
     const {
       name, email, password, petPreference,
     } = request.body;
